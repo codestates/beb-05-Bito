@@ -1,0 +1,19 @@
+{
+  "name": "beb-05-bito",
+  "version": "1.0.0",
+  "description": "beb-05-Bito",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codestates/beb-05-Bito.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codestates/beb-05-Bito/issues"
+  },
+  "homepage": "https://github.com/codestates/beb-05-Bito#readme"
+}
