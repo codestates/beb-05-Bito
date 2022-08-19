@@ -1,3 +1,4 @@
 node_modules
 .deps
-build-info
+contracts/contracts/artifacts/build-info
+contracts/test/artifacts/build-info
