@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/codestates/beb-05-Bito/issues"
   },
-  "homepage": "https://github.com/codestates/beb-05-Bito#readme"
+  "homepage": "https://github.com/codestates/beb-05-Bito#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.7.3",
+    "openzeppelin-solidity": "4.6.0"
+  }
 }
