@@ -21,7 +21,7 @@ const result = await contract.methods.FUNCTION().send(); // Tx 발생
     - 사용자가 게시글을 발행한 경우 보상으로 토큰 지급
     - 사용자가 댓글을 다는 경우 보상으로 토큰 지급
 
-<div style="margin-left : 100px;">
+<div style="margin-left : 100px !important;">
 
 |코드|Action|보상|
 |:---:|:---:|:---:|
