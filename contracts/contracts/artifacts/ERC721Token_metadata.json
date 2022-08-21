@@ -181,6 +181,11 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
 						"internalType": "string",
 						"name": "_tokenURI",
 						"type": "string"
@@ -301,6 +306,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					}
+				],
+				"name": "setApprovalForNFTs",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "bytes4",
 						"name": "interfaceId",
 						"type": "bytes4"
@@ -341,6 +365,35 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "tokenTrasferFrom",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -534,11 +587,11 @@
 			]
 		},
 		"contracts/ERC-721.sol": {
-			"keccak256": "0xa9f2dbf2bf5023aeac2d338bc8f50d9bc9fad9eb905ba5904ce77b120e2fe0b6",
+			"keccak256": "0xe4e4bdb1c080293a0fbae475c852f1b6611c782403a81de393d6200301219b3e",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://624fd890e6fb1e883ada1c6528edf8f03d44cf78e68118f3b507a7f8c1913ddc",
-				"dweb:/ipfs/QmdEjETVixFd3bCaZNPmRxqvMnzbRVFx1KJF8hjPhwco8Z"
+				"bzz-raw://3a410ce71bcbc3290cb8b961bb5eb0346b1d8c3678ac6bd8a7e9622c4da30696",
+				"dweb:/ipfs/QmYvXKYDi1ZcFrMadmKu1vN5JwJeb3BgaAUJxZw5spYcW7"
 			]
 		}
 	},

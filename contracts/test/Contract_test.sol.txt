@@ -1,0 +1,95 @@
+// SPDX-License-Identifier: GPL-3.0
+        
+pragma solidity >=0.4.22 <0.9.0;
+
+// This import is automatically injected by Remix
+// import "remix_tests.sol"; 
+// 
+// This import is required to use custom transaction context
+// Although it may fail compilation in 'Solidity Compiler' plugin
+// But it will work fine in 'Solidity Unit Testing' plugin
+// import "remix_accounts.sol";
+
+import "truffle/Assert.sol";
+import "truffle/DeployedAddresses.sol";
+import "../contracts/ERC-20.sol";
+import "../contracts/ERC-721.sol";
+import "../contracts/Marketplace.sol";
+
+// File name has to end with '_test.sol', this file can contain more than one testSuite contracts
+contract MarketplaceTest {
+    // ERC20Token token20;
+    // ERC721Token token721;
+    Marketplace marketplace;
+    address user1;
+    address user2;
+    address user3;
+
+    /// 'beforeAll' runs before all other tests
+    /// More special functions are: 'beforeEach', 'beforeAll', 'afterEach' & 'afterAll'
+    function beforeAll() public {
+        // <instantiate contract>
+        Assert.equal(uint(1), uint(1), "1 should be equal to 1");
+        marketplace = new Marketplace();
+        // token20 = new ERC20Token(address(marketplace));
+        // token721 = new ERC721Token();
+        user1 = TestsAccounts.getAccount(0);
+        user2 = TestsAccounts.getAccount(1);
+        user3 = address(0x0);
+    }
+
+    function TestOfTest() public {
+        string memory ERC20Name = marketplace.token20Name();
+        Assert.equal(ERC20Name, "Bito Token", "Name Required");
+    }
+
+    // function ContractBasicTest() public{
+    //     Assert.equal(token20.name(), "Bito Token", "Token name should be equal");
+    //     Assert.equal(token721.name(), "Bito NFT", "Token name should be equal");
+    //     Assert.greaterThan(uint(token20.balanceOf(address(marketplace))) , uint(0), "Initial Token should be owned by Marketplace contract");
+    // }
+
+    // function ERC20_ContractTest() public{
+    //     marketplace.ERC20_Provider(401, user1);
+    //     marketplace.ERC20_Provider(401, user2);
+    //     Assert.equal(uint(marketplace.getBalanceOfERC20(user1)), uint(100), "Initial Token should be provided");
+    //     Assert.equal(uint(marketplace.getBalanceOfERC20(user2)), uint(100), "Initial Token should be provided");
+    // }
+
+    // function ERC721_ContractTest() public{
+    //     marketplace.createERC721Token(user1, "TestTokenURI", 5);
+    //     Assert.ok(uint(marketplace.itemCount()) == uint(1), "tokenCnt should be increased");
+    //     Assert.ok(marketplace.getOwnerOfERC721(uint256(1)) == user1, "ERC721 should be owned by publisher");
+    // }
+
+    // function BuyERC721() public{
+    //     Assert.ok(marketplace.getIsApprovedForAll(user1, address(marketplace)), "setProvalAll success");
+    //     Assert.ok(uint(marketplace.itemCount()) == uint(1), "NFT count is 1" );
+    //     token721.tokenTrasferFrom(user1, user2, uint256(1));
+    //     // marketplace.buyERC721Token(address(user2), address(marketplace), int(1));
+    //     Assert.ok(marketplace.getOwnerOfERC721(uint256(1)) != user2, "ERC721 ownership should be changed");
+    //     // Assert.greaterThan(uint(marketplace.getBalanceOfERC20(user1)), uint(100), "Seller should have money for NFT selling");
+
+    // }
+
+
+
+    // function checkSuccess2() public pure returns (bool) {
+    //     // Use the return value (true or false) to test the contract
+    //     return true;
+    // }
+    
+    // function checkFailure() public {
+    //     Assert.notEqual(uint(1), uint(1), "1 should not be equal to 1");
+    // }
+
+    // /// Custom Transaction Context: https://remix-ide.readthedocs.io/en/latest/unittesting.html#customization
+    // /// #sender: account-1
+    // /// #value: 100
+    // function checkSenderAndValue() public payable {
+    //     // account index varies 0-9, value is in wei
+    //     Assert.equal(msg.sender, TestsAccounts.getAccount(1), "Invalid sender");
+    //     Assert.equal(msg.value, 100, "Invalid value");
+    // }
+}
+    
