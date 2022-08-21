@@ -1,9 +1,10 @@
 {
-  "name": "beb-05-bito",
+  "name": "server",
   "version": "1.0.0",
-  "description": "beb-05-Bito",
+  "description": "server",
   "main": "index.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +19,10 @@
   "homepage": "https://github.com/codestates/beb-05-Bito#readme",
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
+    "body-parser": "^1.20.0",
     "express": "^4.18.1",
-    "openzeppelin-solidity": "4.6.0"
+    "mongodb": "4.8",
+    "openzeppelin-solidity": "4.6.0",
+    "web3": "^1.7.5"
   }
 }
