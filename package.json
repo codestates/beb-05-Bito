@@ -18,6 +18,9 @@
   "homepage": "https://github.com/codestates/beb-05-Bito#readme",
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
-    "openzeppelin-solidity": "4.6.0"
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "openzeppelin-solidity": "4.6.0",
+    "web3": "^1.7.5"
   }
 }
