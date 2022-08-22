@@ -6,7 +6,13 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -278,6 +284,11 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
 						"name": "_to",
 						"type": "address"
 					},
@@ -416,11 +427,11 @@
 			]
 		},
 		"contracts/ERC-20.sol": {
-			"keccak256": "0x39e78685eaafaa46dc1a0d592a3419bbfcd48e67a884192665691e3f92018f48",
+			"keccak256": "0x00d6015926e9948d481c7d56b6e37751df8a343f85ddbecde27bb522ea48d16b",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://886d53f939b9654da3e75e1ff738f7f69780c2a2ff0aea3a52be9b8b286f59ff",
-				"dweb:/ipfs/QmSfbwo3QMT8rHSpss51aYVHd54g27PNobvJCvT8dZDnCx"
+				"bzz-raw://a1746658ba113753cbfdf4d0b1e8fab48d88446c762943504c769521d1632786",
+				"dweb:/ipfs/QmXDc9eRjJh4Fv2EtnUrv1r7ZxCK4nPVo9ZH55eRqijBGG"
 			]
 		}
 	},

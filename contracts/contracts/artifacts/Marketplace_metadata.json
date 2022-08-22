@@ -42,6 +42,12 @@
 						"internalType": "address",
 						"name": "buyer",
 						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "sold",
+						"type": "bool"
 					}
 				],
 				"name": "NFTBought",
@@ -73,6 +79,12 @@
 						"internalType": "address",
 						"name": "seller",
 						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "sold",
+						"type": "bool"
 					}
 				],
 				"name": "NFTOffered",
@@ -156,9 +168,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_to",
-						"type": "address"
+						"internalType": "int256",
+						"name": "_benefit",
+						"type": "int256"
 					}
 				],
 				"name": "ERC20_Provider",
@@ -204,7 +216,7 @@
 						"type": "int256"
 					}
 				],
-				"name": "buyNFT",
+				"name": "buyERC721Token",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
@@ -234,61 +246,95 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "getAllItems",
-				"outputs": [
+				"inputs": [
 					{
-						"components": [
-							{
-								"internalType": "int256",
-								"name": "itemId",
-								"type": "int256"
-							},
-							{
-								"internalType": "string",
-								"name": "tokenURI",
-								"type": "string"
-							},
-							{
-								"internalType": "int256",
-								"name": "price",
-								"type": "int256"
-							},
-							{
-								"internalType": "address payable",
-								"name": "seller",
-								"type": "address"
-							},
-							{
-								"internalType": "bool",
-								"name": "sold",
-								"type": "bool"
-							}
-						],
-						"internalType": "struct Marketplace.NFT_List[]",
-						"name": "",
-						"type": "tuple[]"
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
 					}
 				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getName20",
+				"name": "getBalanceOfERC20",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "getName721",
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_operator",
+						"type": "address"
+					}
+				],
+				"name": "getIsApprovedForAll",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "int256",
+						"name": "_itemId",
+						"type": "int256"
+					}
+				],
+				"name": "getItemSeller",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "getOwnerOfERC721",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "int256",
+						"name": "_itemId",
+						"type": "int256"
+					}
+				],
+				"name": "getTokenURIERC721",
 				"outputs": [
 					{
 						"internalType": "string",
@@ -332,10 +378,17 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "setAllNFTsToContract",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_tokenAddress",
+						"name": "contractAddress",
 						"type": "address"
 					}
 				],
@@ -354,7 +407,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_tokenAddress",
+						"name": "contractAddress",
 						"type": "address"
 					}
 				],
@@ -367,6 +420,58 @@
 					}
 				],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token20Name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token20Symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token721Name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "token721Symbol",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -515,27 +620,27 @@
 			]
 		},
 		"contracts/ERC-20.sol": {
-			"keccak256": "0x39e78685eaafaa46dc1a0d592a3419bbfcd48e67a884192665691e3f92018f48",
+			"keccak256": "0x4fe8eef1ca427322d00899928432b38006b48ee048df403391f6b413ea7d1b80",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://886d53f939b9654da3e75e1ff738f7f69780c2a2ff0aea3a52be9b8b286f59ff",
-				"dweb:/ipfs/QmSfbwo3QMT8rHSpss51aYVHd54g27PNobvJCvT8dZDnCx"
+				"bzz-raw://43a4ace1b0bd7cc700340d4ce158d1610b997c78cf55d74c639855edd675e863",
+				"dweb:/ipfs/QmZPoqBwoNVAzkzkqsejrJrDw6BUg2MK5euMCWciLuWaYe"
 			]
 		},
 		"contracts/ERC-721.sol": {
-			"keccak256": "0xa9f2dbf2bf5023aeac2d338bc8f50d9bc9fad9eb905ba5904ce77b120e2fe0b6",
+			"keccak256": "0xe4e4bdb1c080293a0fbae475c852f1b6611c782403a81de393d6200301219b3e",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://624fd890e6fb1e883ada1c6528edf8f03d44cf78e68118f3b507a7f8c1913ddc",
-				"dweb:/ipfs/QmdEjETVixFd3bCaZNPmRxqvMnzbRVFx1KJF8hjPhwco8Z"
+				"bzz-raw://3a410ce71bcbc3290cb8b961bb5eb0346b1d8c3678ac6bd8a7e9622c4da30696",
+				"dweb:/ipfs/QmYvXKYDi1ZcFrMadmKu1vN5JwJeb3BgaAUJxZw5spYcW7"
 			]
 		},
 		"contracts/Marketplace.sol": {
-			"keccak256": "0xd0e2c6975b0d5c5a48ddb4bf98b80ffa61f4745113a4cbfb342cc71ea3e83d8b",
+			"keccak256": "0x6af0cd6866febee118137a44faff49ecd750ae802065da15984b3277f10887fb",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://81cdc07f4b73a7b1d5793836d30de71c82bf48a7ab1c275291493a7d53028e78",
-				"dweb:/ipfs/QmWWJxuxPUVCf3gYw1nnPPF8F7SNjokhYWBZaaQCxTu8eu"
+				"bzz-raw://99917eef1f9f5e1ba422c47e492947031392925b67ca54a49e46f30e946625f2",
+				"dweb:/ipfs/QmNu6SJ82G6LiZC1Hdup1Wrhb1r3EnuTkPAnGBQDp1Kx15"
 			]
 		}
 	},
