@@ -7,12 +7,25 @@ function getWeb3(){
     return web3;
 }
 
+const connectWallet = async () => {
+    const accounts = await window.ethereum.request({
+      method: "eth_requestAccounts", // connect to metamask wallet
+    });
+
+    setAccount(accounts[0]);
+    web3.eth.getBalance(accounts[0]).then((bal)=>{
+      setBalance(parseFloat(web3.utils.fromWei(bal,'ether')).toFixed(5))
+    })
+  }
+  
 exports.main_get = async(req,res,next) =>{
     try{
         res.status(200).send("Hello world")
         const accounts = await getWeb3().eth.getAccounts();
         const serverAddress = accounts[0];
         console.log('account', accounts[0])
+
+
     } catch(e){
         throw Error(e)
     }
