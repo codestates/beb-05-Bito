@@ -32,8 +32,8 @@
 }
 
 input{
-  width: 160px;
-  padding: 6px 20px;
+  width: 200px;
+  padding: 10px 50px;
   background: #faf9f9;
   border: 0.5px solid #b4afaf;
   border-radius: 3%;
@@ -41,8 +41,8 @@ input{
 
 .searchBarInput::placeholder{
   text-align: center;
-  letter-spacing: 0.04rem;
-  font-size: 12px;
+  letter-spacing: 0.01rem;
+  font-size: 15px;
 }
 
 .searchIcon{
@@ -52,8 +52,8 @@ input{
   display: flex;
   align-items: center;
   align-self: center;
-  left: 55px;
-  top: 3px;
+  left: 5px;
+  top: 8px;
 }
 
 

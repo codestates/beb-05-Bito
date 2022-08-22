@@ -1,51 +1,19 @@
 import React, { useState, useEffect } from "react";
 import "../css/App.css";
-import Post from "./Post";
-import Story from "./Story";
-import SearchIcon from "@material-ui/icons/Search";
+
 import { auth, db } from "./firebase";
-import Modal from "@material-ui/core/Modal";
-import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Input } from "@material-ui/core";
-
-import InstaEmbed from "./InstaEmbed";
-import Suggested from "./Suggested";
-
-import HomeIcon from '@material-ui/icons/Home';
-import NearMeOutlinedIcon from '@material-ui/icons/NearMeOutlined';
-import ExploreOutlinedIcon from '@material-ui/icons/ExploreOutlined';
-import FavoriteBorderOutlinedIcon from '@material-ui/icons/FavoriteBorderOutlined';
-
-import ImageUpload from './ImageUpload';
-
-function getModalStyle() {
-    const top = 50;
-    const left = 50;
-  
-    return {
-      top: `${top}%`,
-      left: `${left}%`,
-      transform: `translate(-${top}%, -${left}%)`,
-    };
-  }
-  
-  const useStyles = makeStyles((theme) => ({
-    paper: {
-      position: "absolute",
-      width: 280,
-      height: 360,
-      backgroundColor: theme.palette.background.paper,
-      border: "1px solid #000",
-      boxShadow: theme.shadows[5],
-      padding: theme.spacing(2, 4, 3),
-    },
-  }));
+// component
+import LeftMenu from '../components/LeftMenu';
+import RightMenu from "../components/RightMenu";
+import UploadMessage from "../components/UploadMessage";
+import Board from "../components/Board";
+import Modal_Signin from "../components/Modal_Signin";
+import Modal_Signup from "../components/Modal_Signup";
+import Header from "../components/Header";
+import BoardUpload from "../components/BoardUpload";
+import Story from "../components/Story";
 
 export default function MainPage(){
-
-    const classes = useStyles();
-    const [modalStyle] = useState(getModalStyle);
     const [openSignIn, setOpenSignIn] = useState(false);
     const [posts, setPosts] = useState([]);
     const [open, setOpen] = useState(false);
@@ -55,7 +23,26 @@ export default function MainPage(){
     const [email, setEmail] = useState("");
   
     const [user, setUser] = useState(null);
+
+    //로그인창 오픈 
+    const _setOpenSignIn = (value) => {
+      setOpenSignIn(value);
+    }
+    const _setEmail = (value) => {
+      setEmail(value)
+    }
+    const _setPassword = (value) => {
+      setPassword(value)
+    }
+    const _setOpen = (value) =>{
+      setOpen(value)
+    }
+    const _setUsername = (value) =>{
+      setUsername(value)
+    }
   
+
+    // 이펙트 상태 
     useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged((authUser) => {
         if (authUser) {
@@ -84,199 +71,56 @@ export default function MainPage(){
       });
     }, []);
   
-    const signUp = (event) => {
-      event.preventDefault();
-  
-      auth
-        .createUserWithEmailAndPassword(email, password)
-        .then((authUser) => {
-          return authUser.user.updateProfile({
-            displayName: username,
-          });
-        })
-        .catch((error) => alert(error.message));
-    };
-  
-    const signIn = (event) => {
-      event.preventDefault();
-  
-      auth
-        .signInWithEmailAndPassword(email, password)
-        .catch((error) => alert(error.message));
-  
-      setOpenSignIn(false);
-    };
-  
+
     return (
       <div className="App">
-        <Modal open={open} onClose={() => setOpen(false)}>
-          <div style={modalStyle} className={classes.paper}>
-            <form className="app__signup">
-              <center>
-                <img
-                  className="modal__headerImage"
-                  src="/images/logo.png"
-                  alt="instagram"
-                />
-              </center>
-              <Input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="signup_input"
-              />
-              <Input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="signup_input"
-              />
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="signup_input"
-              />
-  
-             
-  
-              <Button type="submit" onClick={signUp} variant="contained" color="secondary">
-                Sign Up
-              </Button>
-  
-              <div className="signInLabel">
-                <img
-                  displayName="modal__headerImage"
-                  src="https://i.pinimg.com/originals/8a/77/05/8a770507298d728a1e3e039a0507dd8e.png"
-                  alt="instagram"
-                  className="signInLabelImg"
-                />
-                <p className = "signInLabelText">Sed ut perspiciatis unde omnis iste natus error sit voluptatem Sed ut perspiciatis unde omnis iste natus error ut perspiciatis unde omnis iste natus error </p>
-              </div>
-            </form>
-          </div>
-        </Modal>
-  
-        <Modal open={openSignIn} onClose={() => setOpenSignIn(false)}>
-          <div style={modalStyle} className={classes.paper}>
-            <form className="app__signup">
-              <center>
-                <img
-                  className="modal__headerImage"
-                  src="/images/logo.png"
-                  alt="instagram"
-                />
-              </center>
-  
-              <Input
-                type="text"
-                placeholder="Email ID"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="signup_input"
-              />
-              <Input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="signup_input"
-              />
-  
-              <Button type="submit" onClick={signIn} variant="contained" color="secondary">
-                Sign In
-              </Button>
-  
-              <div className="signInLabel">
-                <img
-                  displayName="modal__headerImage"
-                  src="https://i.pinimg.com/originals/8a/77/05/8a770507298d728a1e3e039a0507dd8e.png"
-                  alt="instagram"
-                  className = "signInLabelImg"
-                />
-                <p className = "signInLabelText">Sed ut perspiciatis unde omnis iste natus error sit voluptatem Sed ut perspiciatis unde omnis iste natus error ut perspiciatis unde omnis iste natus error </p>
-              </div>
-  
-                          
-            </form>
-           
-          </div>
-        </Modal>
-  
-        <div className="app__header">
-          <img
-            className="app__headerImage"
-            src="/images/logo.png"
-            alt="instagram"
-          />
-  
-          <div className="searchForm">
-            <form>
-              <SearchIcon className="searchIcon" fontSize="small" />
-              <input type="text" id="filter" placeholder="Search" className="searchBarInput"/>
-            </form>
-          </div>
-  
-          <div className="header_icons">
-            <HomeIcon fontSize="large" className="header_icon"/>
-            <NearMeOutlinedIcon fontSize="large" className="header_icon"/>
-            <ExploreOutlinedIcon fontSize="large" className="header_icon"/>
-            <FavoriteBorderOutlinedIcon fontSize="large" className="header_icon" />
-          </div>
-  
-          <div className="signupButton" >
-            {user ? (
-              <Button onClick={() => auth.signOut()} 
-              variant="contained" color="secondary" className="signOutButton">Logout</Button>
-            ) : (
-              <div className="app__loginContainer">
-                <Button onClick={() => setOpenSignIn(true)} className="signInButton">Sign In</Button>
-                <Button onClick={() => setOpen(true)} variant="contained" color="secondary">Sign Up</Button>
-              </div>
-            )}
-          </div>
-          
-        </div>
-  
-        <InstaEmbed />
-  
-        <Suggested />
-  
-        <Story />
+        {/* 로그인 팝업 */}
+        <Modal_Signin 
+          par_openSignIn={openSignIn} 
+          par_setOpenSignIn={_setOpenSignIn}
+          par_email={email}
+          par_setEmail={_setEmail}
+          par_password={password}
+          par_setPassword={_setPassword}
+        />
         
-        { user?.displayName ? (
-          <ImageUpload username = {user.displayName} />
-        ) : (
-        <div className="upload_message" >
-          <h3>Login to Create a Post 🚀 !!!</h3>
-          <p><b>Welcome to Instagram Clone App!</b> To Create a new Post, the user has to sign up for the apllication first using any mail ID (Works with an Invalid Mail ID too). For example : "xyz@gmail.com". User can Sign-In using the same credentials again and again. <br /><br />
-          <b>For Creating a Post</b> you need to sign-in first. Then click the "UPLOAD PHOTO" Button. Select a Photo from your device, add a suitable caption to the Post, and then click "CREATE POST" Button. Wait till the photo gets uploaded. And then BOOM!!! Your Post has been created(Scroll a bit if you don't find your post at the top).
-          <br /><br />
-          <b>Hope you have a Great time exploring the Application 💖 !!!</b>
-          </p>
-          <Button onClick={() => setOpenSignIn(true)} className="upload_signInButton" color="secondary" variant="contained" >Sign In</Button>
-  
-        </div>
-          
-        )}
+        {/* 회원 가입 팝업  */}
+        <Modal_Signup
+          par_open={open}
+          par_setOpen={_setOpen}
+          par_username={username}
+          par_setUsername={_setUsername}
+          par_email={email}
+          par_setEmail={_setEmail}
+          par_password={password}
+          par_setPassword={_setPassword}
+        />
+        {/* 상단 바 (헤더) */}
+        <Header
+         par_setOpenSignIn={_setOpenSignIn}
+         par_setOpen={_setOpen}
+         par_user={user}
+         />
+
+        {/*왼쪽 메뉴 컴포넌트*/}
+        <LeftMenu/>
+
+        {/*오른쪽 메뉴 컴포넌트*/}
+        <RightMenu/>
+
+        {/*상단 스토리 메뉴 컴포넌트*/}
+        <Story/>
+
+        {/*중단 메뉴 컴포넌트*/}
+        <BoardUpload username = {"ㅁㄴㅇㅁㄴㅇㅁㄴㅇ"} />
+        {/* { user?.displayName ? (
+          <BoardUpload username = {user.displayName} />
+        ) : (<UploadMessage par_setOpenSignIn={_setOpenSignIn}/>)} */}
         
+        {/* 게시판 불러오기 */}
+        <Board par_posts={posts} par_user={user}/>
   
-        {posts.map(({ id, post }) => (
-          <Post
-            key={id}
-            postId = {id}
-            username={post.username}
-            caption={post.caption}
-            imageUrl={post.imageUrl}
-            avatar={post.avatar}
-            user = {user}
-          />
-        ))}
-  
-        
+    
       </div>
     );
 }
