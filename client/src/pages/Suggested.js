@@ -1,5 +1,5 @@
 import React from "react";
-import "./Suggested.css";
+import "../css/Suggested.css";
 import { Avatar, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import InstagramIcon from "@material-ui/icons/Instagram";
@@ -38,7 +38,7 @@ function Suggested() {
 
       <div className="footer">
         <Avatar
-          className="avatar"
+          displayName="avatar"
           alt="Bhuban_Bam"
           src="https://mumbaimirror.indiatimes.com/photo/68636148.cms"
           className={classes.large}
@@ -61,7 +61,7 @@ function Suggested() {
 
       <div className="footer">
         <Avatar
-          className="avatar"
+          displayName="avatar"
           alt="sahidkapoor4"
           src="https://www.filmibeat.com/img/popcorn/profile_photos/shahid-kapoor-20190619173815-177.jpg"
           className={classes.large}
@@ -84,7 +84,7 @@ function Suggested() {
 
       <div className="footer">
         <Avatar
-          className="avatar"
+          displayName="avatar"
           alt="shirleysetia
           "
           src="https://m.media-amazon.com/images/M/MV5BMjMwZjhjOTUtNmVjNS00NTM1LWEwOTItN2ZlMzMwMGY5ZGQ2XkEyXkFqcGdeQXVyNDAzNDk0MTQ@._V1_.jpg"
@@ -108,7 +108,7 @@ function Suggested() {
 
       <div className="footer">
         <Avatar
-          className="avatar"
+          displayName="avatar"
           alt="durjoydatta"
           src="https://images.newindianexpress.com/uploads/user/imagelibrary/2018/12/19/original/accidental.jpg"
           className={classes.large}
@@ -131,7 +131,7 @@ function Suggested() {
 
       <div className="footer">
         <Avatar
-          className="avatar"
+          displayName="avatar"
           alt="cristiano"
           src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQuZfZq9tllEgk_3z9bFGx-NLTS2vRcpSdB0Q&usqp=CAU"
           className={classes.large}
@@ -155,7 +155,7 @@ function Suggested() {
 
       <div className="footer">
         <Avatar
-          className="avatar"
+          displayName="avatar"
           alt="gameofthrones"
           src="https://www.skinillustrator.com/wp-content/uploads/2018/09/got-logo.jpg"
           className={classes.large}

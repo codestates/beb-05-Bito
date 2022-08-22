@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Avatar } from "@material-ui/core";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import "./Post.css";
+import "../css/Post.css";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";

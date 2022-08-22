@@ -1,5 +1,5 @@
 import React from "react";
-import "./InstaEmbed.css";
+import "../css/InstaEmbed.css";
 import CopyrightIcon from '@material-ui/icons/Copyright';
 import { Avatar, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -54,7 +54,7 @@ function InstaEmbed() {
 
       <div className="footer">
         <Avatar
-          className="avatar"
+          displayName="avatar"
           alt="subhampreet"
           src="/images/avatar.jpg"
           className={classes.large}
