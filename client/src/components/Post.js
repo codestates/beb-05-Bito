@@ -88,7 +88,7 @@ function Post({ username, caption, imageUrl, postId, user }) {
         />
 
         <h3>{username}</h3>
-        <div className="MoreHorizIcon">
+        <div className="MoreHorizIcon" style={{left:"65%", float:"left"}}>
           <MoreHorizIcon />
         </div>
       </div>
