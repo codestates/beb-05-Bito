@@ -1,0 +1,165 @@
+#carousel {
+    /*position: absolute;*/
+    width: 1700px;
+    height: 1000px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  
+  .arrow {
+    /* position: absolute; */
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    font-size: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: black;
+    line-height: 30px;
+    margin-top: 85px;
+    z-index: 1000;
+
+  }
+  
+  .arrow-right {
+    float:right;
+    
+  }
+
+  .arrow-left {
+    float:left;
+  }
+
+  .item {
+    color: white;
+    position: absolute;
+    transition: height 1s, width 1s, left 1s, margin-top 1s, line-height 1s, background-color 1s;
+  }
+  /*왼쪽 카드*/
+  .level-2 {
+    /* height: 150px;
+    width: 110px; */
+    line-height: 150px;
+    left: 1030px;
+    margin-top: 25px;
+    z-index:-2;
+  }
+  
+  .level-1 {
+    /* height: 180px;
+    width: 130px; */
+    line-height: 180px;
+    left: 750px;
+    margin-top: 10px;
+    z-index: -1;
+  }
+  /*중앙 카드*/
+  .level0 {
+    /* height: 200px;
+    width: 150px; */
+    line-height: 200px;
+    left: 470px;
+  }
+  /*오른쪽 카드*/
+  .level1 {
+    /* height: 180px;
+    width: 130px; */
+    line-height: 180px;
+    margin-top: 10px;
+    left: 200px;
+  }
+  
+  .level2 {
+    /* height: 150px;
+    width: 110px; */
+    line-height: 180px;
+    margin-top: 25px;
+    left: -80px;
+  }
+  
+  .left-enter {
+    opacity: 0;
+    left: -60px;
+    height: 120px;
+    width: 90px;
+    line-height: 120px;
+    margin-top: 40px;
+  }
+  
+  .left-enter.left-enter-active {
+    opacity: 1;
+    left: 50px;
+    height: 150px;
+    width: 110px;
+    line-height: 150px;
+    margin-top: 25px;
+    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+  }
+  
+  .left-leave {
+    opacity: 1;
+    left: 650px;
+    height: 150px;
+    width: 110px;
+    line-height: 150px;
+    margin-top: 25px;
+  }
+  
+  .left-leave.left-leave-active {
+    left: 780px;
+    opacity: 0;
+    height: 120px;
+    line-height: 120px;
+    margin-top: 40px;
+    width: 90px;
+    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+  }
+  
+  .right-enter {
+    opacity: 0;
+    left: 760px;
+    height: 120px;
+    width: 90px;
+    line-height: 120px;
+    margin-top: 40px;
+  }
+  
+  .right-enter.right-enter-active {
+    left: 650px;
+    opacity: 1;
+    height: 150px;
+    margin-top: 25px;
+    line-height: 150px;
+    width: 110px;
+    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+  }
+  
+  .right-leave {
+    left: 50px;
+    height: 150px;
+    opacity: 1;
+    margin-top: 25px;
+    line-height: 150px;
+    width: 110px;
+  }
+  
+  .right-leave.right-leave-active {
+    left: -60px;
+    opacity: 0;
+    height: 120px;
+    width: 90px;
+    line-height: 120px;
+    margin-top: 40px;
+    transition: left 1s, opacity 1s, height 1s, width 1s, margin-top 1s, line-height 1s;
+  }
+  
+  .noselect {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }

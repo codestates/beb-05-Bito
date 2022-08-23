@@ -11,6 +11,7 @@ import {Link} from 'react-router-dom';
 function Header(props){
     const {par_user, par_setOpenSignIn, par_setOpen} = props;
     return (
+        
         <div className="app__header">
         <img
           className="app__headerImage"
@@ -26,14 +27,18 @@ function Header(props){
         </div>
 
         <div className="header_icons">
-          <HomeIcon fontSize="large" className="header_icon"/>
-          <img src={mypageIcon} alt="" fontSize="large"  className="header_icon" style={{width:"35.17px", height:"30.76" }}/>
-          <Link to="/market">
+          <Link to="/">
+            <HomeIcon fontSize="large" className="header_icon"/>
+          </Link>
+          <Link to="/" style={{marginLeft:15}}>
+            <img src={mypageIcon} alt="" fontSize="large"  className="header_icon" style={{width:"35.17px", height:"30.76" }}/>
+          </Link>
+          <Link to="/market" style={{marginLeft:15}}>
             <img src={markgetIcon} alt="" fontSize="large" className="header_icon" style={{width:"35.17px", height:"30.76" }}/>
           </Link>
           
         </div>
-
+        {/* 로그아웃 분기 여기서  */}
         <div className="signupButton" >
           {par_user ? (
             <Button onClick="" 

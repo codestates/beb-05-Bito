@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
+import MainLogo2 from "../assets/mainLogo2.png";
 
 function Modal_Signup(props){
 
@@ -45,8 +46,8 @@ function Modal_Signup(props){
                 <center>
                 <img
                     className="modal__headerImage"
-                    src="../assets/mainLogo"
-                    alt="instagram"
+                    src={MainLogo2}
+                    alt="mainlogo2"
                 />
                 </center>
                 <Input
