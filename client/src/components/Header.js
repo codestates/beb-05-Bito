@@ -30,7 +30,7 @@ function Header(props){
           <Link to="/">
             <HomeIcon fontSize="large" className="header_icon"/>
           </Link>
-          <Link to="/" style={{marginLeft:15}}>
+          <Link to="/mypage" style={{marginLeft:15}}>
             <img src={mypageIcon} alt="" fontSize="large"  className="header_icon" style={{width:"35.17px", height:"30.76" }}/>
           </Link>
           <Link to="/market" style={{marginLeft:15}}>

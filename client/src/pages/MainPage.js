@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import "../css/App.css";
 // component
 import LeftMenu from '../components/LeftMenu';
@@ -29,7 +30,7 @@ export default function MainPage(props){
         ) : (<UploadMessage par_setOpenSignIn={_setOpenSignIn}/>)} */}
         
         {/* 게시판 불러오기 */}
-        <Board par_posts={par_posts} par_user={par_user}/>
+        <Board par_postsA={par_posts} par_userA={par_user}/>
   
     
       </div>

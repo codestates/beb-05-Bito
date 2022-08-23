@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -12,12 +12,19 @@ import Input from "@mui/material/Input";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import mainlogo2 from "../assets/mainLogo2.png";
+import nfttestimg from "../assets/nfttestimg.png"
+import Container from '@mui/material/Container';
+import BoardNomal from "../components/mypage/BoardNomal";
+import BoardNFT from "../components/mypage/BoardNFT";
 
 const ariaLabel = { "aria-label": "description" };
 
-function MyPage2() {
+function MyPage(props) {
+  const [boardState, setBoardState] = useState(0); // 0=nomal게시판 1=nft게시판
+
   return (
-    <main>
+    <div className="App">
       <Grid container spacing={4}>
         <Grid item xs={12} md={12}>
           <Stack
@@ -33,7 +40,10 @@ function MyPage2() {
                 spacing={2}
                 justifyContent="center"
               >
-                <Avatar alt="Remy Sharp" src="../assets/bito.png" />
+                <Avatar 
+                alt="Remy Sharp" 
+                src={mainlogo2}
+                style={{margin:5}} />
 
                 <CardContent sx={{ flex: 1 }}>
                   <Typography
@@ -94,15 +104,30 @@ function MyPage2() {
           </Stack>
         </Grid>
       </Grid>
-      
-      
 
-      
-    </main>
-  );
+      {/* 게시목록 조회 */}
+      <Stack
+        sx={{ pt: 4, marginTop:5 }}
+        direction="row"
+        spacing={0}
+        justifyContent="center"
+        >
+        <Button variant="contained" onClick={() => setBoardState(0)} sx={{width:426}} >게시물</Button>
+        <Button variant="outlined" onClick={() => setBoardState(1)} sx={{width:426}}>NFTs</Button>
+      </Stack>
+      {/* 게시글 목록 */}
+      <Container maxWidth="md">
+          <Grid container spacing={1}>
+            {
+              boardState == 0? (<BoardNomal/>):(<BoardNFT/>) 
+            }
+          </Grid>
+        </Container>
+      </div>
+    );
 }
 
-MyPage2.propTypes = {
+MyPage.propTypes = {
   post: PropTypes.shape({
     date: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
@@ -112,4 +137,4 @@ MyPage2.propTypes = {
   }).isRequired,
 };
 
-export default MyPage2;
+export default MyPage;

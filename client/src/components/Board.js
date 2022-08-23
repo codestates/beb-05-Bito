@@ -1,11 +1,13 @@
 //게시판
+import React, { useState } from "react";
 import "../css/Post.css"
 import Post from "../components/Post.js"
 
-function Board({par_posts, par_user}){
-  
+function Board(props){
+  const { par_postsA, par_userA } = props;
+
     return (
-      par_posts.map(({ id, post }) => (
+      par_postsA.map(({ id, post }) => (
         <Post
           key={id}
           postId = {id}
@@ -13,7 +15,7 @@ function Board({par_posts, par_user}){
           caption={post.caption}
           imageUrl={post.imageUrl}
           avatar={post.avatar}
-          user = {par_user}
+          user = {par_userA}
         />
       ))
     );

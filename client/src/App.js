@@ -4,9 +4,11 @@ import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import "./css/App.css";
 import MainPage from './pages/MainPage';
 import Market from './pages/Market';
+import Mypage from './pages/MyPage';
 import Header from "./components/Header";
 import Modal_Signin from "./components/Modal_Signin";
 import Modal_Signup from "./components/Modal_Signup";
+import { auth, db } from "./pages/firebase";
 
 export default function App () {
   // 마지막 * 경로는 잘못된 경로 모든 메인페이지로 돌리는 라우팅 
@@ -36,13 +38,33 @@ export default function App () {
       const _setUsername = (value) =>{
         setUsername(value)
       }
-      // 이펙트 최초 로그인 init
+      // 임시 파이어 베이스에서 임시 게시판 정보 불러옴 나중에 삭제 
       useEffect(() => {
-  
+        const unsubscribe = auth.onAuthStateChanged((authUser) => {
+          if (authUser) {
+            // user has logged in...
+            console.log(authUser);
+            setUser(authUser);
+          } else {
+            // user has logged out...
+            setUser(null);
+          }
+        });
+    
+        return () => {
+          unsubscribe();
+        };
       }, [user, username]);
-      // 이펙트 최초 게시물 init
+    // 임시 파이어 베이스에서 임시 게시판 정보 불러옴 나중에 삭제 
       useEffect(() => {
-  
+        db.collection("posts").onSnapshot((snapshot) => {
+          setPosts(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              post: doc.data(),
+            }))
+          );
+        });
       }, []);
 
   return (
@@ -77,7 +99,7 @@ export default function App () {
       <Routes>
         <Route path='/' element={<MainPage par_posts={posts} par_user={user}/>} />
         <Route path='/market' element={<Market/>}/>
-        
+        <Route path='/mypage' element={<Mypage/>}/>
         <Route path="*" element={<MainPage />} /> 
       </Routes>
     </BrowserRouter>
