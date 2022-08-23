@@ -6,7 +6,7 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
 import NearMeOutlinedIcon from "@material-ui/icons/NearMeOutlined";
-import { db } from "./firebase";
+import { db } from "../pages/firebase";
 
 import TurnedInNotOutlinedIcon from "@material-ui/icons/TurnedInNotOutlined";
 
