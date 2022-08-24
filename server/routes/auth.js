@@ -21,7 +21,7 @@ router.post("/signup", signup);
 
 router.post("/local", localLogin);
 
-router.get("/google", passport.authenticate("google", { scope: ["profile"] }));
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
 router.get(
   "/google/callback",
