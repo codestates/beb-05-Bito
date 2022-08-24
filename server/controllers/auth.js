@@ -9,7 +9,7 @@ const loginSuccess = (req, res) => {
       success: true,
       message: "successfull",
       user: req.user,
-      cookies: req.cookies,
+      // cookies: req.cookies,
     });
   }
 };
@@ -26,7 +26,7 @@ const loginFailed = (req, res) => {
 // logout
 const logout = (req, res) => {
   req.logout();
-  res.redirect(CLIENT_URL);
+  res.redirect("http://localhost:3000");
 };
 
 const signup =  async (req, res) => {
