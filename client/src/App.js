@@ -4,12 +4,21 @@ import { BrowserRouter, Route, Routes} from 'react-router-dom';
 import "./css/App.css";
 import MainPage from './pages/MainPage';
 import Market from './pages/Market';
+import Mypage from './pages/MyPage';
+import GoogleRedirect from './pages/GoogleRedirect';
+
 import Header from "./components/Header";
 import Modal_Signin from "./components/Modal_Signin";
 import Modal_Signup from "./components/Modal_Signup";
 
-export default function App () {
+export default function App (props) {
   // 마지막 * 경로는 잘못된 경로 모든 메인페이지로 돌리는 라우팅 
+      const search = window.location.search;
+      const params = new URLSearchParams(decodeURIComponent(search));
+      const displayName = params.get('displayName'); // bar
+      const _email = params.get('email');
+      console.log(displayName);
+      
       const [openSignIn, setOpenSignIn] = useState(false);
       const [posts, setPosts] = useState([]);
       const [open, setOpen] = useState(false);
@@ -36,11 +45,10 @@ export default function App () {
       const _setUsername = (value) =>{
         setUsername(value)
       }
-      // 이펙트 최초 로그인 init
+      // 임시 파이어 베이스에서 임시 게시판 정보 불러옴 나중에 삭제 
       useEffect(() => {
-  
-      }, [user, username]);
-      // 이펙트 최초 게시물 init
+      },[]);
+    // 임시 파이어 베이스에서 임시 게시판 정보 불러옴 나중에 삭제 
       useEffect(() => {
   
       }, []);
@@ -75,10 +83,11 @@ export default function App () {
       />
 
       <Routes>
-        <Route path='/' element={<MainPage par_posts={posts} par_user={user}/>} />
+        <Route path='/' element={<MainPage/>} />
         <Route path='/market' element={<Market/>}/>
-        
-        <Route path="*" element={<MainPage />} /> 
+        <Route path='/mypage' element={<Mypage/>}/>
+        <Route path='/googlere' element={<GoogleRedirect/>} {...props} />
+        <Route path="*" element={<MainPage /> }/> 
       </Routes>
     </BrowserRouter>
 

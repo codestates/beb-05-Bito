@@ -1,0 +1,11 @@
+const router = require("express").Router();
+const { createNFT, getAllNFTs, getNFT, deleteNFT, updateNFT } = require("../controllers/nft");
+
+// get feed nfts
+router.post("/creation", createNFT);
+router.get("/:tokenId", getNFT);
+router.put('/:tokenId', updateNFT)
+router.delete("/:tokenId", deleteNFT);
+router.post("/", getAllNFTs);
+
+module.exports = router;
