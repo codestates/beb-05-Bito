@@ -25,6 +25,7 @@ passport.use(
             username: exUser.username,
             email: exUser.email,
             profilePicture: exUser.profilePicture,
+            id:exUser._id,
           };
           console.log("profile", newProfile);
           done(null, newProfile);
@@ -54,6 +55,7 @@ passport.use(
               username: exUser.username,
               email: exUser.email,
               profilePicture: exUser.profilePicture,
+              id:exUser._id,
             };
             console.log(newProfile);
             done(null, newProfile);
