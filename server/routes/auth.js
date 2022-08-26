@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const passport = require("passport");
+const querystring = require('node:querystring');
 
 const {
   loginSuccess,
@@ -26,9 +27,14 @@ router.get("/google", passport.authenticate("google", { scope: ["profile", "emai
 router.get(
   "/google/callback",
   passport.authenticate("google", {
-    successRedirect: "http://localhost:3000/",
     failureRedirect: "/login/failed",
-  })
-);
+  }), function(req, res) {
+  const query = querystring.stringify({
+      "displayName":req.user.displayName,
+      "email": req.user.emails[0].value
+  });
+  res.redirect('http://localhost:3000?'+query);
+});
+
 
 module.exports = router;

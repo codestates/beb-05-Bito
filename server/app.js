@@ -23,7 +23,6 @@ mongoose.connect(process.env.MONGO_CONNECT, () => {
 
 const app = express();
 
-
 app.use(morgan("common"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -47,12 +46,13 @@ app.use(
   })
 );
 
+
 app.get('/', (req, res)=>{
     res.json("Welcome to Bito Marketplace Appcliation");
 })
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
-app.use("/api/post", postRoute);
+app.use("/api/post", postRoute); 
 app.use("/api/nft", nftRoute);
 
 const PORT = process.env.PORT || 4000;
