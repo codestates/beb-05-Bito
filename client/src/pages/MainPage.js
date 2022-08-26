@@ -28,7 +28,7 @@ export default function MainPage(){
         ) : (<UploadMessage par_setOpenSignIn={_setOpenSignIn}/>)} */}
         
         {/* 게시판 불러오기 */}
-        <Board par_userId={"630715f3c813bff6b60267ff"}/>
+        {/* <Board par_userId={"630715f3c813bff6b60267ff"}/> */}
       </div>
     );
 }

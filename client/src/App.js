@@ -12,6 +12,7 @@ import Modal_Signin from "./components/Modal_Signin";
 import Modal_Signup from "./components/Modal_Signup";
 import Web3 from "web3";
 import {AccountContext} from './context/accountContext';
+import {GetUser} from "../src/api/GetUser";
 
 export default function App (props) {
   // 마지막 * 경로는 잘못된 경로 모든 메인페이지로 돌리는 라우팅 
@@ -49,30 +50,9 @@ export default function App (props) {
       }
 
       useEffect(() => {
-        const getUser = () => {
-          fetch("http://localhost:4000/api/auth/login/success", {
-            method: "GET",
-            credentials: "include",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Credentials": true,
-            },
-          })
-          .then((response) => {
-          if (response.status === 200) return response.json();
-            throw new Error("authentication has been failed");
-          })
-          .then((resObject) => {
-            console.log(resObject);
-            setUser(resObject.user);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        };
-        getUser();
-        
+        const _user = GetUser();
+        setUser(_user);
+        console.log(_user)
         if (typeof window.ethereum !== "undefined") { // window.ethereum이 있다면
           try {
               const web = new Web3(window.ethereum);  // 새로운 web3 객체를 만든다
@@ -85,10 +65,9 @@ export default function App (props) {
 
       }, []);
 
-      //wallet state check 
       useEffect(() => {
-     
-      });
+  
+      },);
 
 
   return (

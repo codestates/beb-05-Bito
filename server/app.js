@@ -17,7 +17,7 @@ const nftRoute = require('./routes/nft')
 
 dotenv.config();
 
-mongoose.connect(process.env.MONGO_CONNECT, () => {
+mongoose.connect("mongodb+srv://beb0502:beb0502@cluster0.cpkgm5l.mongodb.net/bitoDB?retryWrites=true&w=majority", () => {
     console.log("Connected to Mongo DB ...");
   });
 
@@ -49,8 +49,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/',(req, res, next)=>{
-  console.log(req.session);
+app.use('/', (req, res, next)=>{
+  console.log(req.user);
   next();
 })
 

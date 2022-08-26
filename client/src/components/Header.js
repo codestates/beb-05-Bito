@@ -13,12 +13,14 @@ import "../css/Google.css";
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import { useContext } from "react";
 import {AccountContext} from '../context/accountContext';
+import {SetUserAddress} from "../api/SetUserAddress";
 
 
 function Header(props){
     const {par_user, par_setOpenSignIn, par_setOpen, web3} = props;
     const {account, setAccount} = useContext(AccountContext);
 
+    console.log(par_user);
     // 지갑 연결 
     const WalletConnection = () =>{
       const accounts = window.ethereum.request({
@@ -26,7 +28,9 @@ function Header(props){
       }).then(result =>{
         setAccount(result);
       })
-  
+      // 계정 업데이트(서비스이용 최종)
+      const result  = SetUserAddress();
+      console.log(result);
     }
 
     return (
@@ -61,11 +65,15 @@ function Header(props){
       
         {/* 로그아웃 분기 여기서  */}
         <div className="signupButton" >
-          {par_user ? (
+          {par_user != null ? (
             <div>
-              <Button startIcon={<AccountBalanceWalletIcon/>} onClick={() => WalletConnection()} variant="contained" color="secondary" style={{backgroundColor:"#4bf542"}}>{account.length == 0 ? "Connect" : "Wallet"}</Button> 
+                <div className="app__loginContainer">
+              <Button onClick={() => par_setOpenSignIn(true)} className="signInButton">Sign In</Button>
+              <Button onClick={() => par_setOpen(true)} variant="contained" color="secondary">Sign Up</Button>
+            </div>
+              {/* <Button startIcon={<AccountBalanceWalletIcon/>} onClick={() => WalletConnection()} variant="contained" color="secondary" style={{backgroundColor:"#4bf542"}}>{account.length == 0 ? "Connect" : "Wallet"}</Button> 
               <Button onClick={() => window.open(global.BASE_URL+"api/auth/logout", "_self")} 
-            variant="contained" color="secondary" className="signOutButton">Logout</Button>
+            variant="contained" color="secondary" className="signOutButton">Logout</Button> */}
             </div>
           ) : (
             <div className="app__loginContainer">
