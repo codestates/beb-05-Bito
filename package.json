@@ -1,10 +1,9 @@
 {
-  "name": "server",
+  "name": "beb-05-bito",
   "version": "1.0.0",
-  "description": "server",
+  "description": "beb-05-Bito",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,22 +18,10 @@
   "homepage": "https://github.com/codestates/beb-05-Bito#readme",
   "dependencies": {
     "@openzeppelin/contracts": "^4.7.3",
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.20.0",
-    "cookie-parser": "^1.4.6",
-    "cookie-session": "^2.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
-    "mongodb": "4.8",
-    "mongoose": "^6.5.2",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.19",
+    "jsonwebtoken": "^8.5.1",
     "openzeppelin-solidity": "4.6.0",
-    "passport": "^0.5.0",
-    "passport-google-oauth20": "^2.0.0",
-    "passport-local": "^1.0.0",
-    "web3": "^1.7.5"
+    "passport-local": "^1.0.0"
   }
 }

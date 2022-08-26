@@ -1,7 +1,7 @@
 const express = require("express");
-const { Timestamp } = require("mongodb");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
+const session = require('express-session');
 const mongoose = require('mongoose')
 const passport = require("passport");
 const passportSetup = require("./passport");
@@ -9,11 +9,11 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const morgan = require("morgan");
 
-// Router
-const authRoute = require("./routes/auth");
-const userRoute = require("./routes/user");
-const postRoute = require("./routes/post");
-const nftRoute = require("./routes/nft");
+const userRoute = require('./routes/user')
+const authRoute = require('./routes/auth')
+const postRoute = require('./routes/post')
+const nftRoute = require('./routes/nft')
+
 
 dotenv.config();
 

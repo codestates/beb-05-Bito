@@ -1,6 +1,7 @@
 const passport = require("passport");
-const User = require('../model/user');
+const User = require("../model/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 // login Success
 const loginSuccess = (req, res) => {
@@ -9,7 +10,6 @@ const loginSuccess = (req, res) => {
       success: true,
       message: "successfull",
       user: req.user,
-      // cookies: req.cookies,
     });
   }
 };
@@ -17,6 +17,7 @@ const loginSuccess = (req, res) => {
 // login Failed
 
 const loginFailed = (req, res) => {
+  
   res.status(401).json({
     success: false,
     message: "failure",
@@ -68,9 +69,9 @@ const signup =  async (req, res) => {
   }
 
 module.exports = {
-    loginSuccess,
-    loginFailed,
-    logout,
-    signup,
-    localLogin,
-}
+  loginSuccess,
+  loginFailed,
+  logout,
+  signup,
+  signupWithGoogle,
+};

@@ -6,6 +6,6 @@ router.post("/creation", createNFT);
 router.get("/:tokenId", getNFT);
 router.put('/:tokenId', updateNFT)
 router.delete("/:tokenId", deleteNFT);
-router.get("/", getAllNFTs);
+router.post("/", getAllNFTs);
 
 module.exports = router;
