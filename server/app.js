@@ -1,7 +1,7 @@
 const express = require("express");
-const { Timestamp } = require("mongodb");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
+const session = require('express-session');
 const mongoose = require('mongoose')
 const passport = require("passport");
 const passportSetup = require("./passport");
@@ -9,11 +9,11 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const morgan = require("morgan");
 
-// Router
-const authRoute = require("./routes/auth");
-const userRoute = require("./routes/user");
-const postRoute = require("./routes/post");
-const nftRoute = require("./routes/nft");
+const userRoute = require('./routes/user')
+const authRoute = require('./routes/auth')
+const postRoute = require('./routes/post')
+const nftRoute = require('./routes/nft')
+
 
 dotenv.config();
 
@@ -27,17 +27,6 @@ const app = express();
 app.use(morgan("common"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(
-  cookieSession({
-    name: "bt-auth",
-    keys: ["bito"],
-    maxAge: 24 * 60 * 100,
-  })
-);
-
-// OAuth 2.0
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use(
   cors({
@@ -47,9 +36,24 @@ app.use(
   })
 );
 
-app.get('/', (req, res)=>{
-    res.json("Welcome to Bito Marketplace Appcliation");
+app.use(session({
+  name:'bitoSession',
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
+}));
+
+
+// OAuth 2.0
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/',(req, res, next)=>{
+  console.log(req.session);
+  next();
 })
+
 app.use("/api/user", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/post", postRoute);
