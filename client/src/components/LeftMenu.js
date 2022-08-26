@@ -4,8 +4,8 @@ import "../css/InstaEmbed.css"
 function LeftMenu(){
   return(
   <div className="instaEmbed">
-  <img src={mainLogo} class="embed_image"/>
-    <div class="embedText">
+  <img src={mainLogo} className="embed_image"/>
+    <div className="embedText">
       <h4>Hello Peeps 👋 !!!</h4>
       <h4>안녕하세요 친구들⚡ !!!</h4>
       <p>Bito IC 커뮤니티에 오신것을 환영 합니다. 우리는 블록체인에 관심있는 사람들과 

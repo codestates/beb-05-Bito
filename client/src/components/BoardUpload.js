@@ -60,7 +60,7 @@ function BoardUpload({ username }) {
       <div className="upload">
         <div className="upload_first">
           <Avatar
-            displayName="post__avatar"
+            displayname="post__avatar"
             alt="subhampreet"
             src="./images/avatar1.jpg"
             className = {classes.large}

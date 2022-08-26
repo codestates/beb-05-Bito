@@ -6,12 +6,13 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import MainLogo2 from "../assets/mainLogo2.png";
 import { useNavigate } from "react-router-dom";
+import * as global from '../Global';
 import axios from "axios";
 
 function Modal_Signin(props){
     // 부모로 부터 속성 다받아오고 
     const navigate = useNavigate();
-    const {par_openSignIn, par_setOpenSignIn, par_email, par_setEmail, par_password, par_setPassword} = props;
+    const {par_openSignIn, par_setOpenSignIn} = props;
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
 
@@ -40,31 +41,30 @@ function Modal_Signin(props){
 
     // 로그인 이벤트 
     const signIn = (event) => {
-          axios({
-            url: "http://localhost:4000/api/auth/local",
-            method: "post",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            data: {
-              email: email,
-              password: password,
-            },
-            withCredentials : true,
-          }).then(result=>{
-            if(result.status === 200){
-              try {
-                navigate('/');
-              } catch (error) {
-                console.error(error);
-              }
-            }else{
-              navigate('/login')
-            }
-          })
-    }
+      axios({
+        url: global.BASE_URL+"api/auth/local",
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: {
+          email: email,
+          password: password,
+        },
+        withCredentials : true,
+      }).then(result=>{
+        if(result.status === 200){
+          try {
+            navigate('/');
+          } catch (error) {
+            console.error(error);
+          }
+        }else{
+          navigate('/login')
+        }
+      })
+    };
     
-
     const classes = useStyles();
     const [modalStyle] = useState(getModalStyle);
     return (
@@ -97,14 +97,18 @@ function Modal_Signin(props){
               <Button type="submit" onClick={signIn} variant="contained" color="secondary">
                 Sign In
               </Button>
-              <Button onClick={() =>{ window.open("http://localhost:4000/api/auth/google", "_self");}} id="google_login_btn" className="google_login_btn"></Button>
+              <Button 
+              onClick={() =>{ window.open(global.BASE_URL+"api/auth/google", "_self");}} 
+              id="google_login_btn" 
+              className="google_login_btn"/>
+
               {/* <form method='GET' action='http://localhost:4000/api/auth/google' style={{display:"inline"}}>
                 <input id="google_login_btn" className="google_login_btn" type="submit" value=" "/>
               </form> */}
   
               <div className="signInLabel">
                 <img
-                  displayName="modal__headerImage"
+                  displayname="modal__headerImage"
                   src="https://i.pinimg.com/originals/8a/77/05/8a770507298d728a1e3e039a0507dd8e.png"
                   alt="instagram"
                   className = "signInLabelImg"

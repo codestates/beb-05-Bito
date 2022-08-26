@@ -13,7 +13,7 @@ function Modal_Signup(props){
     const [email,setEmail] = useState("");
     const [userName,setUserName] = useState("");
     const [password,serPassword] = useState("");
-
+    
 
     function getModalStyle() {
         const top = 50;
@@ -41,8 +41,9 @@ function Modal_Signup(props){
     // 회원가입 이벤트 
     const signUp = () => {
         const result = LocalSignUp(userName,password,email);
+        par_setOpen(false);
+        alert("회원 가입 완료!");
         console.log(result);
-    
     };
 
     const classes = useStyles();
@@ -81,13 +82,13 @@ function Modal_Signup(props){
                 className="signup_input"
                 />
 
-                <Button  onClick={() => signUp()} variant="contained" color="secondary">
+                <Button type="submit" onClick={() => signUp()} variant="contained" color="secondary">
                 Sign Up
                 </Button>
 
                 <div className="signInLabel">
                 <img
-                    displayName="modal__headerImage"
+                    displayname="modal__headerImage"
                     src="https://i.pinimg.com/originals/8a/77/05/8a770507298d728a1e3e039a0507dd8e.png"
                     alt="instagram"
                     className="signInLabelImg"
