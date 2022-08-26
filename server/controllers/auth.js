@@ -1,7 +1,6 @@
 const passport = require("passport");
 const User = require("../model/user");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 // login Success
 const loginSuccess = (req, res) => {
