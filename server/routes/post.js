@@ -31,6 +31,6 @@ router.get('/:id', async (req, res)=>{
 })
 
 // get feed posts
-router.get("/feed/all", getAllFeedPosts);
+router.post("/feed/all", getAllFeedPosts);
 
 module.exports = router;
