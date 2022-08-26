@@ -4,10 +4,17 @@ import Modal from "@material-ui/core/Modal";
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import MainLogo2 from "../assets/mainLogo2.png";
+import {LocalSignUp} from "../api/LocalSignUp";
 
 function Modal_Signup(props){
 
-    const { par_open, par_setOpen, par_username, par_setUsername, par_email, par_setEmail, par_password, par_setPassword } = props;
+    const { par_open, par_setOpen } = props;
+
+    const [email,setEmail] = useState("");
+    const [userName,setUserName] = useState("");
+    const [password,serPassword] = useState("");
+
+
     function getModalStyle() {
         const top = 50;
         const left = 50;
@@ -32,8 +39,10 @@ function Modal_Signup(props){
     }));
 
     // 회원가입 이벤트 
-    const signUp = (event) => {
-        
+    const signUp = () => {
+        const result = LocalSignUp(userName,password,email);
+        console.log(result);
+    
     };
 
     const classes = useStyles();
@@ -53,26 +62,26 @@ function Modal_Signup(props){
                 <Input
                 type="text"
                 placeholder="Username"
-                value={par_username}
-                onChange={(e) => par_setUsername(e.target.value)}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
                 className="signup_input"
                 />
                 <Input
                 type="text"
                 placeholder="Email"
-                value={par_email}
-                onChange={(e) => par_setEmail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="signup_input"
                 />
                 <Input
                 type="password"
                 placeholder="Password"
-                value={par_password}
-                onChange={(e) => par_setPassword(e.target.value)}
+                value={password}
+                onChange={(e) => serPassword(e.target.value)}
                 className="signup_input"
                 />
 
-                <Button type="submit" onClick={signUp} variant="contained" color="secondary">
+                <Button  onClick={() => signUp()} variant="contained" color="secondary">
                 Sign Up
                 </Button>
 

@@ -89,8 +89,7 @@ function BoardUpload({ username }) {
           <input type="file" onChange={handleChange} hidden ref={fileInputRef} />
           
   
-          <Button variant="contained" onClick={handleUpload} color="secondary"          className = {classes.button}
-  >
+          <Button variant="contained" onClick={handleUpload} color="secondary"className = {classes.button}>
             Create Post
           </Button>
         </div>

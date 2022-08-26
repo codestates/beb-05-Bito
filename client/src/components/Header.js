@@ -7,11 +7,28 @@ import markgetIcon from "../assets/marketIcon.png"
 import HomeIcon from '@material-ui/icons/Home';
 import Button from "@material-ui/core/Button";
 import {Link} from 'react-router-dom';
+import * as global from '../Global';
+import {LocalSignUp} from "../api/LocalSignUp";
 import "../css/Google.css";
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import { useContext } from "react";
+import {AccountContext} from '../context/accountContext';
 
 
 function Header(props){
-    const {par_user, par_setOpenSignIn, par_setOpen} = props;
+    const {par_user, par_setOpenSignIn, par_setOpen, web3} = props;
+    const {account, setAccount} = useContext(AccountContext);
+
+    // 지갑 연결 
+    const WalletConnection = () =>{
+      const accounts = window.ethereum.request({
+        method: "eth_requestAccounts"
+      }).then(result =>{
+        setAccount(result);
+      })
+  
+    }
+
     return (
         
         <div className="app__header">
@@ -40,18 +57,20 @@ function Header(props){
           </Link>
           
         </div>
+        {/*wallet connection*/}
+      
         {/* 로그아웃 분기 여기서  */}
         <div className="signupButton" >
           {par_user ? (
-            <Button onClick="" 
+            <div>
+              <Button startIcon={<AccountBalanceWalletIcon/>} onClick={() => WalletConnection()} variant="contained" color="secondary" style={{backgroundColor:"#4bf542"}}>{account.length == 0 ? "Connect" : "Wallet"}</Button> 
+              <Button onClick={() => window.open(global.BASE_URL+"api/auth/logout", "_self")} 
             variant="contained" color="secondary" className="signOutButton">Logout</Button>
+            </div>
           ) : (
             <div className="app__loginContainer">
-              <form method='GET' action='http://localhost:4000/api/auth/google' style={{display:"inline"}}>
-                <input id="google_login_btn" className="google_login_btn" type="submit" value=" "/>
-              </form>
-              {/* <Button onClick={() => par_setOpenSignIn(true)} className="signInButton">Sign In</Button> */}
-              {/* <Button onClick={() => par_setOpen(true)} variant="contained" color="secondary">Sign Up</Button> */}
+              <Button onClick={() => par_setOpenSignIn(true)} className="signInButton">Sign In</Button>
+              <Button onClick={() => par_setOpen(true)} variant="contained" color="secondary">Sign Up</Button>
             </div>
           )}
         </div>
