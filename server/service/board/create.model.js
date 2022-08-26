@@ -4,6 +4,7 @@ const Counter = require("./../boardCounter.model");
 
 exports.create = async (req) => {
     const client = new MongoClient(process.env.DATA_BASE_URL); 
+    console.log(process.env.DATA_BASE_URL)
     try {
         const { user_id, title, content } = req.body
 
