@@ -8,9 +8,7 @@ import Board from "../components/Board";
 import BoardUpload from "../components/BoardUpload";
 import Story from "../components/Story";
 
-export default function MainPage(props){
-
-    const {par_posts, par_user} = props;
+export default function MainPage(){
 
     return (
       <div className="App">
@@ -30,9 +28,7 @@ export default function MainPage(props){
         ) : (<UploadMessage par_setOpenSignIn={_setOpenSignIn}/>)} */}
         
         {/* 게시판 불러오기 */}
-        <Board par_postsA={par_posts} par_userA={par_user}/>
-  
-    
+        <Board par_userId={"630715f3c813bff6b60267ff"}/>
       </div>
     );
 }

@@ -6,47 +6,30 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
 import NearMeOutlinedIcon from "@material-ui/icons/NearMeOutlined";
-import { db } from "../pages/firebase";
-
 import TurnedInNotOutlinedIcon from "@material-ui/icons/TurnedInNotOutlined";
 
-import Button from "@material-ui/core/Button";
+import { Block } from "@material-ui/icons";
+import testimg from "../assets/nfttestimg.png"
 
-import firebase from "firebase";
-
-function Post({ username, caption, imageUrl, postId, user }) {
+function Post({ username, contents }) {
   const [comments, SetComments] = useState([]);
   const [comment, SetComment] = useState("");
+  const [likeCount,SetLikeCount] = useState(0); // 좋아요 갯수 
 
+  // 매번 렌더링 될때마다 호출이 됨 =그러니깐 post자체가 렌더링 될때마다지 -> 여기서 댓글 관리 
   useEffect(() => {
-    let unsubscribe;
-    if (postId) {
-      unsubscribe = db
-        .collection("posts")
-        .doc(postId)
-        .collection("comments")
-        .orderBy("timestamp", "desc")
-        .onSnapshot((snapshot) => {
-          SetComments(snapshot.docs.map((doc) => doc.data()));
-        });
-    }
+   
+  },[]);
 
-    return () => {
-      unsubscribe();
-    };
-  }, [postId]);
-
+  // 댓글 입력 API필요 아직 구현 ㄴㄴ
   const postComment = (event) => {
     event.preventDefault();
 
-    db.collection("posts").doc(postId).collection("comments").add({
-      text: comment,
-      username: user.displayName,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+  
     SetComment("");
   };
 
+  // 아바타는 살리고 
   const avatars = [
     {
       ava:
@@ -72,11 +55,6 @@ function Post({ username, caption, imageUrl, postId, user }) {
 
   const [avatar, setAvatar] = useState(0);
 
-  const randomAvatar = (e) => {
-    const len = avatars.length;
-    setAvatar(Math.floor(Math.random() * len));
-  };
-
   return (
     <div className="post">
       {/* header => avatar + username */}
@@ -86,18 +64,16 @@ function Post({ username, caption, imageUrl, postId, user }) {
           alt="subhampreet"
           src={avatars[avatar].ava}
         />
-
         <h3>{username}</h3>
         <div className="MoreHorizIcon" style={{left:"65%", float:"left"}}>
           <MoreHorizIcon />
         </div>
       </div>
 
-      {/* Image */}
-      <img className="post__image" src={imageUrl} />
+      {/* 업로드 이미지 */}
+      <img className="post__image" src={testimg} />
 
-      {/* POST ICONS */}
-
+      {/* 좋아요 구독 공유 아이콘*/}
       <div className="likeShare">
         <FavoriteBorderIcon className="likeShare-item" fontSize="medium" />
         <ModeCommentOutlinedIcon className="likeShare-item" fontSize="medium" />
@@ -105,29 +81,38 @@ function Post({ username, caption, imageUrl, postId, user }) {
         <TurnedInNotOutlinedIcon
           className="likeShare-item-save"
           fontSize="medium"
+          
         />
       </div>
-
-      {/* username + caption */}
-      <h5 className="post__text">
+      {/* 좋아요 갯수 */}
+      <div className="post_comments">
+        <h5 className="comment">
+          좋아요 {likeCount}개
+        </h5>
+      </div>
+   
+      {/* 작성자와 작성글 내용 */}
+      <h7 className="post__text" style={{display:Block}}>
         {" "}
         <strong>{username} </strong>
-        {caption}
-      </h5>
+      </h7>
+      <div className="post_comments" style={{borderBottom:"1px solid lightgray"}}>
+        <h5 className="comment">
+          {contents}
+        </h5>
+      </div>
 
-      {/* COMMENTS */}
-
-      <div className="post_comments">
+      {/* 댓글*/}
+      {/* <div className="post_comments" style={{marginTop:20}}>
         {comments.map((comment) => (
           <h5 className="comment">
             <strong>{comment.username}</strong> {comment.text}
           </h5>
         ))}
-      </div>
+      </div> */}
 
-      {/* POST CAPTIONS */}
-
-      {user && (
+      {/* 로그인한 사람만 보임 == 댓글 기능*/}
+      {/* {user && (
         <form className="postComment_Box">
           <input
             className="comment_input"
@@ -146,7 +131,7 @@ function Post({ username, caption, imageUrl, postId, user }) {
             Post
           </Button>
         </form>
-      )}
+      )} */}
     </div>
   );
 }

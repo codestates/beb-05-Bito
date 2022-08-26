@@ -7,6 +7,8 @@ import markgetIcon from "../assets/marketIcon.png"
 import HomeIcon from '@material-ui/icons/Home';
 import Button from "@material-ui/core/Button";
 import {Link} from 'react-router-dom';
+import "../css/Google.css";
+
 
 function Header(props){
     const {par_user, par_setOpenSignIn, par_setOpen} = props;
@@ -45,8 +47,11 @@ function Header(props){
             variant="contained" color="secondary" className="signOutButton">Logout</Button>
           ) : (
             <div className="app__loginContainer">
-              <Button onClick={() => par_setOpenSignIn(true)} className="signInButton">Sign In</Button>
-              <Button onClick={() => par_setOpen(true)} variant="contained" color="secondary">Sign Up</Button>
+              <form method='GET' action='http://localhost:4000/api/auth/google' style={{display:"inline"}}>
+                <input id="google_login_btn" className="google_login_btn" type="submit" value=" "/>
+              </form>
+              {/* <Button onClick={() => par_setOpenSignIn(true)} className="signInButton">Sign In</Button> */}
+              {/* <Button onClick={() => par_setOpen(true)} variant="contained" color="secondary">Sign Up</Button> */}
             </div>
           )}
         </div>
