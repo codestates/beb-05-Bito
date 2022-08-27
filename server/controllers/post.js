@@ -1,4 +1,4 @@
-const Post = require("../model/post");
+let Post = require("../model/post");
 const User = require("../model/user");
 
 
@@ -10,7 +10,43 @@ const createPost = async (req, res) => {
     } catch (err) {
       res.status(500).json(err);
     }
-  }
+}
+
+// 이미지 업로드2
+const createPost2 = async (req, res) => {
+    try {
+        const url = req.protocol + '://' + req.get('host')
+        // req.protocol => http or https
+        // req.get('host') => (현재) localhost:4000
+        console.log(req.body)
+        const post = new Post({
+            userId: req.body.userId,
+            comment: req.body.comment,
+            userName: req.body.userName,
+            imgUrl: url + '/public/' + req.file.filename,
+            imgName: req.body.imgName,
+        });
+        
+        post.save().then(result => {
+            res.status(200).json({
+                status: 1,
+                message: 'success',
+                data: result
+            })
+        }).catch(err => {
+            console.log(err);
+            res.status(200).json({
+                status: 0,
+                message: 'fail',
+                data: err
+            })
+        })
+
+    } catch (err) {
+        console.log(err)
+      res.status(500).json(err);
+    }
+}
 
 const deletePost = async(req, res)=>{
     try{
@@ -78,5 +114,6 @@ module.exports = {
     deletePost,
     updatePost,
     likePost,
-    getAllFeedPosts
+    getAllFeedPosts,
+    createPost2
 }

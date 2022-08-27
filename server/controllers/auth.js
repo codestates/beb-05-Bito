@@ -4,11 +4,19 @@ const bcrypt = require("bcrypt");
 
 // login Success
 const loginSuccess = (req, res) => {
+  console.log("login sueccess 정보 ")
+  console.log(req.user)
   if (req.user) {
     res.status(200).json({
       success: true,
       message: "successfull",
       user: req.user,
+    });
+  }else{
+    res.status(200).json({
+      success: false,
+      message: "fail",
+      user: null
     });
   }
 };
@@ -23,10 +31,16 @@ const loginFailed = (req, res) => {
   });
 };
 
-// logout
+// logout 
+// 세션에 바로 적용이안되서 로그아웃시도시 바로 적용안되는경우가 있다고함 
+// 세션 save후 리다이렉트로 바꿈
 const logout = (req, res) => {
+  console.log("로그아웃 시작됨")
   req.logout();
-  res.redirect("http://localhost:3000");
+  console.log("로그아웃 시작됨")
+  req.session.save(function(){
+    res.redirect("http://localhost:3000");
+  })
 };
 
 const signup = async (req, res) => {

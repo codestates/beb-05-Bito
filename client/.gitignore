@@ -5,6 +5,7 @@
 /.pnp
 .pnp.js
 ./src/Global.js
+# 이미지 저장경로
 
 # testing
 /coverage

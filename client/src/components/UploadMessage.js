@@ -2,7 +2,7 @@
 import "../css/ImageUpload.css"
 import Button from "@material-ui/core/Button";
 
-function UploadMessage({par_setOpenSignIn}){
+function UploadMessage({setOpenSignIn}){
   
     return (
         <div className="upload_message" style={{maxWidth:780}}>
@@ -15,7 +15,7 @@ function UploadMessage({par_setOpenSignIn}){
         <br /><br />
         <b>IC 토큰을 모아서 서로 교환하고 NFT를 구매해보세요💖 !!!</b>
         </p>
-        <Button onClick={()=>par_setOpenSignIn(true)} className="upload_signInButton" color="secondary" variant="contained" >Sign In</Button>
+        <Button onClick={()=>setOpenSignIn(true)} className="upload_signInButton" color="secondary" variant="contained" >Sign In</Button>
 
       </div>
     );

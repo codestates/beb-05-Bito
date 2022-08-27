@@ -7,8 +7,16 @@ import UploadMessage from "../components/UploadMessage";
 import Board from "../components/Board";
 import BoardUpload from "../components/BoardUpload";
 import Story from "../components/Story";
+import { useContext } from "react";
+import {AccountContext} from '../context/accountContext';
+import {SetUserAddress} from "../api/SetUserAddress";
 
-export default function MainPage(){
+export default function MainPage(props){
+    const {user, setOpenSignIn} = props;
+    const {account, setAccount} = useContext(AccountContext);
+
+    console.log(user)
+    console.log(account.length)
 
     return (
       <div className="App">
@@ -22,13 +30,12 @@ export default function MainPage(){
         <Story/>
 
         {/*중단 메뉴 컴포넌트*/}
-        <BoardUpload username = {"ㅁㄴㅇㅁㄴㅇㅁㄴㅇ"} />
-        {/* { user?.displayName ? (
-          <BoardUpload username = {user.displayName} />
-        ) : (<UploadMessage par_setOpenSignIn={_setOpenSignIn}/>)} */}
+        { (user != null) && (account.length != 0) ? (
+          <BoardUpload user={user} />
+        ) : (<UploadMessage setOpenSignIn={setOpenSignIn}/>)}
         
         {/* 게시판 불러오기 */}
-        {/* <Board par_userId={"630715f3c813bff6b60267ff"}/> */}
+        <Board user={user}/>
       </div>
     );
 }

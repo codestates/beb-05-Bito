@@ -5,11 +5,17 @@ const PostSchema = new mongoose.Schema({
         type : String,
         required : true,
     },
+    userName:{
+        type: String
+    },
     comment : {
         type : String,
         max : 1200,
     },
-    img : {
+    imgUrl : {
+        type : String,
+    },
+    imgName : {
         type : String,
     },
     likes : {

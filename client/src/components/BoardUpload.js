@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import "../css/ImageUpload.css";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+import {SetCreatePost} from "../api/SetCreatePost";
 import { Avatar } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -18,35 +19,37 @@ const useStyles = makeStyles((theme) => ({
   
 }));
 
-function BoardUpload({ username }) {
+function BoardUpload(props) {
+    const {user} = props;
     const [image, setImage] = useState(null);
-    //const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState("");
     const [caption, setCaption] = useState("");
 
-    // 이미지 교체
+    // 이미지 생성및 교체 
     const handleChange = (e) => {
       const file = e.target.files[0];
-
       if (file) {
         const fileType = file["type"];
         const validImageTypes = ["image/gif", "image/jpeg", "image/png"];
         if (validImageTypes.includes(fileType)) {
           setError("");
           setImage(file);
+          console.log(file)
         } else {
           console.log("error");
           setError("error please upload a image file");
         }
+      
       }
     };
   
-    // 게시글 업로드 api 연동 부분 
+    // 게시글 업로드
     const handleUpload = () => {
       if (image) {
+        const res = SetCreatePost(user.id,"MuYaho",image,caption);
+        console.log(res);
         
-      
       } else {
         setError("Error please choose an image to upload");
       }

@@ -19,9 +19,8 @@ export default function App (props) {
       const [openSignIn, setOpenSignIn] = useState(false);
       const [open, setOpen] = useState(false);
 
-      // 로그인 유저 정보 
-      const [user, setUser] = useState(null);
-      const [account,setAccount] = useState([]); // web3 계정 정보 (전역)
+      const [user, setUser] = useState();   // 로그인 유저 정보 
+      const [account,setAccount] = useState([]); // web3 지갑 정보 (전역)
       const [web3,setWeb3] = useState();
 
       const _setOpenSignIn = (value) => {
@@ -40,6 +39,7 @@ export default function App (props) {
         const result = GetUser();
         result.then(data =>{
           setUser(data)
+          console.log(data)
         })
         if (typeof window.ethereum !== "undefined") { // window.ethereum이 있다면
           try {
@@ -76,11 +76,11 @@ export default function App (props) {
       />
 
       <Routes>
-        <Route path='/' element={<MainPage/>} />
+        <Route path='/' element={<MainPage  setOpenSignIn={_setOpenSignIn} user={user}/>} />
         <Route path='/market' element={<Market/>}/>
         <Route path='/mypage' element={<Mypage/>}/>
         {/* <Route path='/googlere' element={<GoogleRedirect/>} {...props} /> */}
-        <Route path="*" element={<MainPage /> }/> 
+        <Route path="*" element={<MainPage/> }/> 
       </Routes>
       </AccountContext.Provider>
     </BrowserRouter>

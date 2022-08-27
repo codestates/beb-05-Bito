@@ -6,15 +6,16 @@ import {GetBoardList} from "../api/GetBoardList";
 
 function Board(props)
 { // userName 추가해야함 displayName
-  const {par_userId} = props;
+  const {user} = props;
   const [posts,SetPosts] = useState([]);
   const tmp_userName = "임시 사용자" // 나중에  구글 닉네임으로 ㄱ 
+  console.log(user)
 
   async function fetchData(){
-    const result = await GetBoardList(par_userId);
+    const result = await GetBoardList(user.id);
     SetPosts(result);
+    console.log(posts)
   }
-
   // 최초 실행시만 
   useEffect((e) => {
     fetchData();

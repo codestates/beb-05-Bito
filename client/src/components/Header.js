@@ -15,27 +15,32 @@ import "../css/Google.css";
 import * as global from '../Global';
 
 
-function Header(props){
-
+function Header(props)
+{
     const {par_user,par_setUser, par_setOpenSignIn, par_setOpen} = props;
     const {account, setAccount} = useContext(AccountContext);
 
+    // 로그아웃
     function Logout(){
       par_setUser(null);
       window.open(global.BASE_URL+"api/auth/logout", "_self")
       console.log("logout run!!")
     }
     // 지갑 연결 
-    const WalletConnection = () =>{
+     const WalletConnection = () =>{
       const accounts = window.ethereum.request({
         method: "eth_requestAccounts"
       }).then(result =>{
-        setAccount(result);
+        console.log(result)
+          alert("Site Wallet Connection Complete !!");
+          console.log("사이트랑 지갑 연동 완료 계정 정보 업데이트")
+          setAccount(result[0]);
+          SetUserAddress(par_user.id,result[0]); // 지갑 정보 업데이트
+        
+      }).then(()=>{
+        console.log(account)
       })
-      console.log(account)
-      // 계정 업데이트(서비스이용 최종)  지갑 등록!
-      // const result  = SetUserAddress();
-      // console.log(result);
+     
     }
 
     return (
@@ -54,7 +59,7 @@ function Header(props){
           </form>
         </div>
 
-        <div className="header_icons">
+        <div className="header_icons" style={{marginRight:10}}>
           <Link to="/">
             <HomeIcon fontSize="large" className="header_icon"/>
           </Link>
@@ -69,7 +74,7 @@ function Header(props){
 
 
         {/* 로그아웃 분기 여기서  */}
-        <div className="signupButton" >
+        <div className="signupButton">
           { par_user == null ? ( // 유저 정보가 없으면 로그인 시킴 
             <div>
               <div className="app__loginContainer">
@@ -91,7 +96,8 @@ function Header(props){
                 onClick={() => Logout()} 
                 variant="contained" 
                 color="secondary" 
-                className="signOutButton">
+                className="signOutButton"
+                style={{marginLeft:10}}>
                   Logout
               </Button>
 

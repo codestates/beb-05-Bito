@@ -30,11 +30,13 @@
     "mongodb": "4.8",
     "mongoose": "^6.5.2",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^2.0.19",
     "openzeppelin-solidity": "4.6.0",
     "passport": "^0.5.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
+    "uuidv4": "^6.2.13",
     "web3": "^1.7.5"
   }
 }
