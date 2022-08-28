@@ -11,7 +11,9 @@ import Modal_Signin from "./components/Modal_Signin";
 import Modal_Signup from "./components/Modal_Signup";
 import {AccountContext} from './context/accountContext';
 import {GetUser} from "./api/GetUser";
+import {GetUserInfo} from "./api/GetUserInfo"
 import Web3 from "web3";
+import { DateRange } from '@material-ui/icons';
 
 
 export default function App (props) {
@@ -39,20 +41,33 @@ export default function App (props) {
         const result = GetUser();
         result.then(data =>{
           setUser(data)
-          console.log(data)
+          if(data == null){
+          }else{
+            GetUserInfo(data.id).then((res)=>{
+              if(res.address != 0){
+                setAccount(res.address)
+                console.log("이미 등록된 지갑")
+              }
+            })
+          }
         })
         if (typeof window.ethereum !== "undefined") { // window.ethereum이 있다면
           try {
               const web = new Web3(window.ethereum);  // 새로운 web3 객체를 만든다
-              console.log(web);
               setWeb3(web); // web3 객체 업데이트
           } catch (err) {
               console.log(err);
           }
         }
-
+      },[])
+      // get Userinfo 
+      useEffect(() => {
         console.log(user)
-      }, []);
+        const result = GetUserInfo(user);
+        console.log(result)
+      },[]);
+
+
 
   return (
     <BrowserRouter>
@@ -60,8 +75,9 @@ export default function App (props) {
       <Header 
         par_setOpenSignIn={_setOpenSignIn}
         par_setOpen={_setOpen}
-        par_user={user}
-        par_setUser={_setUser}
+        user={user}
+        setUser={_setUser}
+        web3={web3}
       />
       {/* 로그인 팝업 */}
       <Modal_Signin 
@@ -76,7 +92,7 @@ export default function App (props) {
       />
 
       <Routes>
-        <Route path='/' element={<MainPage  setOpenSignIn={_setOpenSignIn} user={user}/>} />
+        <Route path='/' element={<MainPage web3={web3} setOpenSignIn={_setOpenSignIn} user={user}/>} />
         <Route path='/market' element={<Market/>}/>
         <Route path='/mypage' element={<Mypage/>}/>
         {/* <Route path='/googlere' element={<GoogleRedirect/>} {...props} /> */}

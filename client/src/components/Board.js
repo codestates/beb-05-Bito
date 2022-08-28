@@ -6,13 +6,11 @@ import {GetBoardList} from "../api/GetBoardList";
 
 function Board(props)
 { // userName 추가해야함 displayName
-  const {user} = props;
+  const {user,userId} = props;
   const [posts,SetPosts] = useState([]);
-  const tmp_userName = "임시 사용자" // 나중에  구글 닉네임으로 ㄱ 
-  console.log(user)
 
   async function fetchData(){
-    const result = await GetBoardList(user.id);
+    const result = await GetBoardList(userId);
     SetPosts(result);
     console.log(posts)
   }
@@ -27,22 +25,12 @@ function Board(props)
       posts.reverse().map((obj, idx) =>(
         <Post
           key={obj._id}
-          username={tmp_userName}
+          username={obj.userName}
           contents={obj.comment}
+          imgUrl={obj.imgUrl} 
         />
       ))
-      // posts.map(({ asset, index }) => (
-      //   console.log(asset[index])
-      //   // <Post
-      //   //   key={asset._id}
-      //   //   postId = {asset._id}
-      //   //   username={index}
-      //   //   caption={index}
-      //   //   imageUrl={index}
-      //   //   avatar={index}
-      //   //   user = {par_userA}
-      //   // />
-      // ))
+  
     );
 
 }

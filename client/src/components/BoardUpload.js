@@ -6,6 +6,9 @@ import "../css/ImageUpload.css";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import {SetCreatePost} from "../api/SetCreatePost";
 import { Avatar } from "@material-ui/core";
+import { ERC_SetToken } from "../api/ERC_SetToken";
+import { useContext } from "react";
+import {AccountContext} from '../context/accountContext';
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -20,11 +23,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function BoardUpload(props) {
-    const {user} = props;
+    const {user, web3} = props;
     const [image, setImage] = useState(null);
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState("");
     const [caption, setCaption] = useState("");
+    const {account, setAccount} = useContext(AccountContext);
 
     // 이미지 생성및 교체 
     const handleChange = (e) => {
@@ -47,9 +51,11 @@ function BoardUpload(props) {
     // 게시글 업로드
     const handleUpload = () => {
       if (image) {
-        const res = SetCreatePost(user.id,"MuYaho",image,caption);
-        console.log(res);
-        
+        SetCreatePost(user.id,user.username,image,caption).then(()=>{
+          ERC_SetToken(web3,101,account).then(()=>{
+            //window.location.replace("/")
+          })
+        })      
       } else {
         setError("Error please choose an image to upload");
       }

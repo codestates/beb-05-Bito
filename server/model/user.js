@@ -29,7 +29,7 @@ const UserSchema = new mongoose.Schema({
     },
     address : {
         type : String,
-        default : '0x0000000000000000000000000000000000000000'
+        default : '0'
     },
     tokenAmount : {
         type : Number,

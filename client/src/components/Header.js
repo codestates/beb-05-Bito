@@ -13,30 +13,41 @@ import {AccountContext} from '../context/accountContext';
 import {SetUserAddress} from "../api/SetUserAddress";
 import "../css/Google.css";
 import * as global from '../Global';
+import { ERC_SetToken } from "../api/ERC_SetToken";
+import { GetUserInfo } from "../api/GetUserInfo";
 
 
 function Header(props)
 {
-    const {par_user,par_setUser, par_setOpenSignIn, par_setOpen} = props;
+    const {user,setUser, par_setOpenSignIn, par_setOpen, web3} = props;
     const {account, setAccount} = useContext(AccountContext);
 
     // 로그아웃
     function Logout(){
-      par_setUser(null);
+      setUser(null);
       window.open(global.BASE_URL+"api/auth/logout", "_self")
       console.log("logout run!!")
     }
+    //userInfor 호출
+
     // 지갑 연결 
-     const WalletConnection = () =>{
-      const accounts = window.ethereum.request({
-        method: "eth_requestAccounts"
-      }).then(result =>{
-        console.log(result)
+      const WalletConnection = () => {
+        const accounts = window.ethereum.request({
+          method: "eth_requestAccounts"
+        }).then(result => {
+          GetUserInfo(user.id).then((res)=>{
+            if(res.address == 0){ // 최조 지급 
+              ERC_SetToken(web3,401,result[0]);
+              console.log("최초 지급 완료!")
+            }
+          })
+          return result;
+      }).then(result => {
+          console.log(result)
           alert("Site Wallet Connection Complete !!");
           console.log("사이트랑 지갑 연동 완료 계정 정보 업데이트")
           setAccount(result[0]);
-          SetUserAddress(par_user.id,result[0]); // 지갑 정보 업데이트
-        
+          SetUserAddress(user.id,result[0]); // 지갑 정보 업데이트
       }).then(()=>{
         console.log(account)
       })
@@ -75,7 +86,7 @@ function Header(props)
 
         {/* 로그아웃 분기 여기서  */}
         <div className="signupButton">
-          { par_user == null ? ( // 유저 정보가 없으면 로그인 시킴 
+          { user == null ? ( // 유저 정보가 없으면 로그인 시킴 
             <div>
               <div className="app__loginContainer">
                 <Button onClick={() => par_setOpenSignIn(true)} className="signInButton">Sign In</Button>

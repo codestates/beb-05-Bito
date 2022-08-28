@@ -7,11 +7,11 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ModeCommentOutlinedIcon from "@material-ui/icons/ModeCommentOutlined";
 import NearMeOutlinedIcon from "@material-ui/icons/NearMeOutlined";
 import TurnedInNotOutlinedIcon from "@material-ui/icons/TurnedInNotOutlined";
-
 import { Block } from "@material-ui/icons";
-import testimg from "../assets/nfttestimg.png"
 
-function Post({ username, contents }) {
+
+function Post(props) {
+  const {username, contents,imgUrl} = props
   const [comments, SetComments] = useState([]);
   const [comment, SetComment] = useState("");
   const [likeCount,SetLikeCount] = useState(0); // 좋아요 갯수 
@@ -71,7 +71,7 @@ function Post({ username, contents }) {
       </div>
 
       {/* 업로드 이미지 */}
-      <img className="post__image" src={testimg} />
+      <img className="post__image" src={imgUrl} />
 
       {/* 좋아요 구독 공유 아이콘*/}
       <div className="likeShare">
@@ -92,10 +92,10 @@ function Post({ username, contents }) {
       </div>
    
       {/* 작성자와 작성글 내용 */}
-      <h7 className="post__text" style={{display:Block}}>
+      <h3 className="post__text" style={{display:Block}}>
         {" "}
         <strong>{username} </strong>
-      </h7>
+      </h3>
       <div className="post_comments" style={{borderBottom:"1px solid lightgray"}}>
         <h5 className="comment">
           {contents}

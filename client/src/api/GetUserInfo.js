@@ -1,13 +1,10 @@
 import axios from 'axios';
 import * as global from '../Global';
 
-export async function GetBoardList(userId) {
+export async function GetUserInfo(userId) {
     try {
-      console.log("run")
       //630496a9b27dd713313652eb
-      const res = await axios.post(global.BASE_URL+"api/post/feed/all",{
-        userId: '6308516e23fcb1f611f21334'
-      });
+      const res = await axios.get(global.BASE_URL+"api/user/"+userId)
       console.log(res.data)
       return res.data;
 
