@@ -34,12 +34,13 @@ export default function App (props) {
       const _setUser = (value) =>{
         setUser(value);
       }
+      
     
-
       //렌더링시 한번 실행
       useEffect(() => {
         const result = GetUser();
         result.then(data =>{
+          console.log(data)
           setUser(data)
           if(data == null){
           }else{
@@ -59,13 +60,14 @@ export default function App (props) {
               console.log(err);
           }
         }
+
       },[])
       // get Userinfo 
-      useEffect(() => {
-        console.log(user)
-        const result = GetUserInfo(user);
-        console.log(result)
-      },[]);
+      // useEffect(() => {
+      //   console.log(user)
+      //   const result = GetUserInfo(user);
+      //   console.log(result)
+      // },[]);
 
 
 
@@ -91,10 +93,10 @@ export default function App (props) {
         par_setOpen={_setOpen}
       />
 
-      <Routes>
-        <Route path='/' element={<MainPage web3={web3} setOpenSignIn={_setOpenSignIn} user={user}/>} />
+      <Routes> {/* user != null 이렇게 사용하면 렌더링전에 데이터셋을 완료시키고 보낼수가있지*/}
+        <Route path='/' element={(user != null) ? (<MainPage web3={web3} setOpenSignIn={_setOpenSignIn} user={user} userId={user.id}/>) : ""} />
         <Route path='/market' element={<Market/>}/>
-        <Route path='/mypage' element={<Mypage/>}/>
+        <Route path='/mypage' element={(user != null && account.length != 0) ? (<Mypage web3={web3} user={user}/>) : ""}/>
         {/* <Route path='/googlere' element={<GoogleRedirect/>} {...props} /> */}
         <Route path="*" element={<MainPage/> }/> 
       </Routes>

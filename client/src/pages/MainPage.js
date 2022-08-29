@@ -14,6 +14,7 @@ import {SetUserAddress} from "../api/SetUserAddress";
 export default function MainPage(props){
     const {user, setOpenSignIn, userId, web3} = props;
     const {account, setAccount} = useContext(AccountContext);
+    console.log(userId)
     
     return (
       <div className="App">
@@ -21,7 +22,7 @@ export default function MainPage(props){
         <LeftMenu/>
 
         {/*오른쪽 메뉴 컴포넌트*/}
-        <RightMenu/>
+        {(user != null) ? (<RightMenu user={user} userId={user.id}/>) :""}
 
         {/*상단 스토리 메뉴 컴포넌트*/}
         <Story/>
@@ -32,7 +33,7 @@ export default function MainPage(props){
         ) : (<UploadMessage setOpenSignIn={setOpenSignIn}/>)}
         
         {/* 게시판 불러오기 */}
-        { (user != null) ? (<Board user={user} userId={userId}/>) : ""}
+        { (user != null) ? (<Board user={user} userId={user.id}/>) : ""}
         
       </div>
     );

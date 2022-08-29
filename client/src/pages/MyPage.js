@@ -1,27 +1,51 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Input from "@mui/material/Input";
+import { Input } from "@material-ui/core";
 import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
 import mainlogo2 from "../assets/mainLogo2.png";
-import nfttestimg from "../assets/nfttestimg.png"
 import Container from '@mui/material/Container';
 import BoardNomal from "../components/mypage/BoardNomal";
 import BoardNFT from "../components/mypage/BoardNFT";
+import {ERC_GetToken} from '../api/ERC_GetToken';
+import { ERC_SendToken } from "../api/ERC_SendToken";
+import { useContext } from "react";
+import {AccountContext} from '../context/accountContext';
 
 const ariaLabel = { "aria-label": "description" };
 
 function MyPage(props) {
+
   const [boardState, setBoardState] = useState(0); // 0=nomal게시판 1=nft게시판
+  const [token,setToken] = useState(); // token
+  const [amount,setAmount] = useState(0); // 보낼양 
+  const [target,setTarget] = useState(""); // 타겟 주소
+  const {web3, user} = props;
+  const {account, setAccount} = useContext(AccountContext);
+
+  useEffect(() => {
+    if(account.length != 0)
+    {
+      ERC_GetToken(web3,account).then((result) =>{
+        setToken(result/100000000000000000)
+      });
+    }
+  },[])
+
+  const SendToken = () => {
+    if(account.length != 0){
+      ERC_SendToken(web3,account,target,amount).then(()=>{
+        alert("전송 완료!");
+      }).ERC_GetToken(web3,account).then((result) =>{
+        setToken(result/100000000000000000)
+      });
+    }
+  };
 
   return (
     <div className="App">
@@ -52,7 +76,7 @@ function MyPage(props) {
                     component="div"
                   >
                     <h3>Email</h3>
-                    <p>email address</p>
+                    <p>{user.email}</p>
                   </Typography>
                   <Typography
                     variant="subtitle1"
@@ -60,7 +84,7 @@ function MyPage(props) {
                     component="div"
                   >
                     <h3>Name</h3>
-                    <p>Name</p>
+                    <p>{user.username}</p>
                   </Typography>
                   <Typography
                     variant="subtitle1"
@@ -68,7 +92,7 @@ function MyPage(props) {
                     component="div"
                   >
                     <h3>IC Token</h3>
-                    <p>IC Token</p>
+                    <p>{token} Bito</p>
                   </Typography>
                   <Typography
                     variant="subtitle1"
@@ -76,7 +100,7 @@ function MyPage(props) {
                     component="div"
                   >
                     <h3>Wallet Address</h3>
-                    <p>Wallet Address</p>
+                    <p>{account}</p>
                   </Typography>
                 </CardContent>
               </Stack>
@@ -87,17 +111,31 @@ function MyPage(props) {
                 <CardContent sx={{ flex: 1 }}>
                   <Typography variant="subtitle1" color="text.secondary">
                     <h3>보낼 주소</h3>
-                    <Input placeholder="보낼 주소" inputProps={ariaLabel} />
+                    <Input 
+                      className="target"
+                      placeholder="보낼 주소" 
+                      inputProps={ariaLabel} 
+                      type="text"
+                      value={target}
+                      onChange={(e) => setTarget(e.target.value)}
+                    />
                   </Typography>
-                  <Typography variant="subtitle1" color="text.secondary">
+                 
                     <h3>토큰 갯수</h3>
-                    <Input placeholder="토큰 갯수" inputProps={ariaLabel} />
-                  </Typography>
+                    <Input 
+                      className="amount"
+                      placeholder="토큰 갯수" 
+                      inputProps={ariaLabel}   
+                      value={amount}
+                      type="text"
+                      onChange={(e) => setAmount(e.target.value)}
+                    />
+                
                 </CardContent>
 
                 {/* 토큰 전송 버튼 */}
                 <CardActions>
-                  <Button variant="contained">보내기</Button>
+                  <Button variant="contained"  onClick={() => SendToken()} >보내기</Button>
                 </CardActions>
               </Stack>
             </Card>
@@ -126,15 +164,5 @@ function MyPage(props) {
       </div>
     );
 }
-
-// MyPage.propTypes = {
-//   post: PropTypes.shape({
-//     date: PropTypes.string.isRequired,
-//     description: PropTypes.string.isRequired,
-//     image: PropTypes.string.isRequired,
-//     imageLabel: PropTypes.string.isRequired,
-//     title: PropTypes.string.isRequired,
-//   }).isRequired,
-// };
 
 export default MyPage;

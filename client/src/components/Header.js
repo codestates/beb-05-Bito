@@ -28,7 +28,6 @@ function Header(props)
       window.open(global.BASE_URL+"api/auth/logout", "_self")
       console.log("logout run!!")
     }
-    //userInfor 호출
 
     // 지갑 연결 
       const WalletConnection = () => {

@@ -12,7 +12,7 @@ function Board(props)
   async function fetchData(){
     const result = await GetBoardList(userId);
     SetPosts(result);
-    console.log(posts)
+    console.log(userId)
   }
   // 최초 실행시만 
   useEffect((e) => {

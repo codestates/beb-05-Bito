@@ -6,6 +6,7 @@ const {
   getUser,
   followUser,
   unfollowUser,
+  getAllUser
 } = require("../controllers/user");
 
 // update User
@@ -16,6 +17,9 @@ router.delete("/:id", deleteUser);
 
 // get a user
 router.get("/:id", getUser);
+
+// get a All user
+router.get("/all/list/:id", getAllUser);
 
 // follow user
 router.put("/follow/:id", followUser);

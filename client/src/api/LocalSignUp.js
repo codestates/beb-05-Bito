@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as global from '../Global';
 
-export async function LocalSignUp(username,email,password) {
+export async function LocalSignUp(username,password,email) {
     try {
         const res = await axios.post(global.BASE_URL+"api/auth/signup",{
             username: username,

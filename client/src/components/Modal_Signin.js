@@ -54,13 +54,14 @@ function Modal_Signin(props){
         withCredentials : true,
       }).then(result=>{
         if(result.status === 200){
+          console.log(result);
           try {
-            navigate('/');
+            //navigate('/');
           } catch (error) {
             console.error(error);
           }
         }else{
-          navigate('/login')
+          //navigate('/login')
         }
       })
     };

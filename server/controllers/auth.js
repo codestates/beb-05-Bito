@@ -4,8 +4,6 @@ const bcrypt = require("bcrypt");
 
 // login Success
 const loginSuccess = (req, res) => {
-  console.log("login sueccess 정보 ")
-  console.log(req.user)
   if (req.user) {
     res.status(200).json({
       success: true,

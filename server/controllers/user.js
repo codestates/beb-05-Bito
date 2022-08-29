@@ -47,6 +47,21 @@ const getUser = async (req, res) => {
     }
   }
 
+  // 모든 사용자 
+const getAllUser = async (req, res) => {
+    try {
+        const user = await User.find({_id: {$ne: req.params.id}});
+        res.status(200).send({
+            users: user
+        });
+
+    } catch (err) {
+        console.log(err+"ss")
+        res.status(500).json("err");
+    }
+}
+
+
 const followUser = async (req, res)=>{
     if(req.body.userId !== req.params.id){
         try{
@@ -94,5 +109,6 @@ module.exports = {
     deleteUser,
     getUser,
     followUser,
-    unfollowUser
+    unfollowUser,
+    getAllUser
 }

@@ -65,10 +65,4 @@ router.get('/:id', async (req, res)=>{
 // get feed posts
 router.post("/feed/all", getAllFeedPosts);
 
-
-
-
-
-
-
 module.exports = router;
