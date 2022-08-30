@@ -17,6 +17,7 @@ import { ERC_SendToken } from "../api/ERC_SendToken";
 import { useContext } from "react";
 import {AccountContext} from '../context/accountContext';
 
+
 const ariaLabel = { "aria-label": "description" };
 
 function MyPage(props) {
@@ -49,6 +50,7 @@ function MyPage(props) {
 
   return (
     <div className="App">
+      
       <Grid container spacing={4}>
         <Grid item xs={12} md={12}>
           <Stack
@@ -142,6 +144,10 @@ function MyPage(props) {
           </Stack>
         </Grid>
       </Grid>
+
+
+      {/* <Button variant="contained" onClick={() => setBoardState(0)} sx={{width:126}} >NFT minting</Button> */}
+      
 
       {/* 게시목록 조회 */}
       <Stack
