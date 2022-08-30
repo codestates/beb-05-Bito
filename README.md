@@ -22,7 +22,7 @@ beb-05-Bito
 
 2. Login: google OAuth 이용한 로그인.
 
-    ![explore.png](imgs/bito_login.png)
+    ![explore.png](images/bito_login.png)
 
 <!-- 3. TokenDetail: NFT 작품의 상세 정보를 확인하고 거래를 할 수 있다.
 
@@ -49,8 +49,11 @@ beb-05-Bito
 .env_example 파일을 .env로 바꾸고에 아래를 채웁니다.
 
    GOOGLE_CLIENT_ID
+   
    GOOGLE_CLIENT_SECRET
-   DATA_BASE_URL=MONGO_CONNECT
+   
+   DATA_BASE_URL
+   
    DATA_BASE_NAME
 
 
