@@ -1,5 +1,6 @@
 # beb-05-Bito
-beb-05-Bito
+beb-05-Bito 
+- main branch는 dev-server입니다
  
  
  npm install 명령어를 통해 모듈을 설치한다. (/server, /client path에서)
